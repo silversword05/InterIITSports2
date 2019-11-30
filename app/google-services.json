@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "907186071906",
+    "firebase_url": "https://interiitsports2.firebaseio.com",
+    "project_id": "interiitsports2",
+    "storage_bucket": "interiitsports2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:907186071906:android:b2bfc0410f178e8132e43b",
+        "android_client_info": {
+          "package_name": "com.example.interiitsports2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "907186071906-75q3oea7kfduu2ditfjd3klp2e4ufj4c.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.interiitsports2",
+            "certificate_hash": "27e249002cafca49458e15512f056a7f18aa998f"
+          }
+        },
+        {
+          "client_id": "907186071906-asnd9999tpv84itq60ctrd8cjn66200q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDAJAub1Uh4LGFMRBSpzxh2YZqtdSD5OHI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "907186071906-asnd9999tpv84itq60ctrd8cjn66200q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

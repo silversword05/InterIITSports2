@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">InterIITSports2</string>
+    <string name="title_sports">Sports</string>
+    <string name="title_newsletter">Newsletter</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_sponsors">Sponsors</string>
+    <string name="inter_iit_sports_meet_n2019">Inter IIT Sports Meet 2019</string>
+    <string name="title_activity_specific_sports">SpecificSportsActivity</string>
+    <string name="tab_text_1">Tab 1</string>
+    <string name="tab_text_2">Tab 2</string>
+</resources>

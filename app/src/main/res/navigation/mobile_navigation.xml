@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_sports">
+
+    <fragment
+        android:id="@+id/navigation_sports"
+        android:name="com.example.interiitsports2.main_page_ui.SportsFragment"
+        android:label="@string/title_sports"
+        tools:layout="@layout/fragment_sports" />
+
+    <fragment
+        android:id="@+id/navigation_newsletter"
+        android:name="com.example.interiitsports2.main_page_ui.NewsletterFragment"
+        android:label="@string/title_newsletter"
+        tools:layout="@layout/fragment_newsletter" />
+
+    <fragment
+        android:id="@+id/navigation_notifications"
+        android:name="com.example.interiitsports2.main_page_ui.NotificationsFragment"
+        android:label="@string/title_notifications"
+        tools:layout="@layout/fragment_notifications" />
+
+    <fragment
+        android:id="@+id/navigation_sponsors"
+        android:name="com.example.interiitsports2.main_page_ui.SponsorsFragment"
+        android:label="@string/title_sponsors"
+        tools:layout="@layout/fragment_sponsors" />
+</navigation>
