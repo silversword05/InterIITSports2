@@ -3,7 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_sports">
+    app:startDestination="@+id/navigation_home">
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.example.interiitsports2.main_page_ui.HomeFragment"
+        android:label="@string/title_sponsors"
+        tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/navigation_sports"
@@ -23,9 +29,5 @@
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
 
-    <fragment
-        android:id="@+id/navigation_sponsors"
-        android:name="com.example.interiitsports2.main_page_ui.SponsorsFragment"
-        android:label="@string/title_sponsors"
-        tools:layout="@layout/fragment_sponsors" />
+
 </navigation>

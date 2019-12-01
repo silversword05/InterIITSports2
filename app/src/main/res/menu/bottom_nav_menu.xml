@@ -2,6 +2,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/navigation_home"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:title="@string/title_home" />
+
+    <item
         android:id="@+id/navigation_sports"
         android:icon="@drawable/ic_sports_icon"
         android:title="@string/title_sports" />
@@ -16,9 +21,6 @@
         android:icon="@drawable/ic_notifications_black_24dp"
         android:title="@string/title_notifications" />
 
-    <item
-        android:id="@+id/navigation_sponsors"
-        android:icon="@drawable/ic_sponsors_icon"
-        android:title="@string/title_sponsors" />
+
 
 </menu>

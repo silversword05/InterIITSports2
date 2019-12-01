@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">InterIITSports2</string>
+    <string name="app_name">InterIITSports2019</string>
     <string name="title_sports">Sports</string>
     <string name="title_newsletter">Newsletter</string>
     <string name="title_notifications">Notifications</string>
@@ -8,4 +8,12 @@
     <string name="title_activity_specific_sports">SpecificSportsActivity</string>
     <string name="tab_text_1">Tab 1</string>
     <string name="tab_text_2">Tab 2</string>
+    <string name="title_home">Home</string>
+    <string name="live">Live</string>
+    <string name="schedule">Schedule</string>
+    <string name="points">Points Table</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="team1_logo">Team1_Logo</string>
+    <string name="team2_logo">Team2_logo</string>
+    <string name="vs">VS</string>
 </resources>

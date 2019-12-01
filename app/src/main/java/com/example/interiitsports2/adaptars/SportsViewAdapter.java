@@ -1,6 +1,7 @@
 package com.example.interiitsports2.adaptars;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.interiitsports2.R;
+import com.example.interiitsports2.SpecificSportsActivity;
 
 public class SportsViewAdapter extends androidx.recyclerview.widget.RecyclerView.Adapter<SportsViewAdapter.SportsViewHolder> {
 	
@@ -35,9 +37,17 @@ public class SportsViewAdapter extends androidx.recyclerview.widget.RecyclerView
 	
 	@Override
 	public void onBindViewHolder(@NonNull SportsViewHolder holder, int position) {
-		String sport = sports_list[position];
+		final String sport = sports_list[position];
 		holder.gridImage.setImageResource(icons[position]);
 		holder.gridText.setText(sport);
+		holder.itemView.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(context, SpecificSportsActivity.class);
+				intent.putExtra("Game", sport);
+				context.startActivity(intent);
+			}
+		});
 	}
 	
 	@Override
