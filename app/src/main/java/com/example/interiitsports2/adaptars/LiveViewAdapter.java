@@ -54,13 +54,13 @@ public class LiveViewAdapter extends androidx.recyclerview.widget.RecyclerView.A
 			public void onClick(View v) {
 				final AlertDialog.Builder builder = new AlertDialog.Builder(context);
 				LayoutInflater li = LayoutInflater.from(context);
-				final View promptsView = li.inflate(R.layout.prompt1, null, false);
+				final View promptsView = li.inflate(R.layout.prompt_comments, null, false);
 				builder.setView(promptsView);
 				builder.setTitle("Comments");
 				final ListView listView = promptsView.findViewById(R.id.comments_list);
 				String comments = liveMatchList.get(position).getCommentary();
 				List<String> comment_list = Arrays.asList(comments.split("\n"));
-				final ArrayAdapter<String> adapter = new ArrayAdapter<>(context, R.layout.prompt1_text, comment_list);
+				final ArrayAdapter<String> adapter = new ArrayAdapter<>(context, R.layout.prompt_comments_text, comment_list);
 				listView.setAdapter(adapter);
 				builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
 					@Override

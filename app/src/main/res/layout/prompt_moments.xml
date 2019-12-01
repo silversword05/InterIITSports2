@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="25dp">
+
+    <EditText
+        android:id="@+id/getCandiName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/name"
+        android:fontFamily="@font/oswaldlightitalic"
+        android:textAlignment="center"
+        android:textSize="22sp"
+        android:importantForAutofill="no"
+        android:inputType="textPersonName">
+    </EditText>
+
+    <EditText
+        android:id="@+id/getCandiEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/email_id"
+        android:fontFamily="@font/oswaldlightitalic"
+        android:textAlignment="center"
+        android:textSize="22sp"
+        android:importantForAutofill="no"
+        android:inputType="textEmailAddress">
+    </EditText>
+
+    <EditText
+        android:id="@+id/getCandimoment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/moment_name"
+        android:fontFamily="@font/oswaldlightitalic"
+        android:textAlignment="center"
+        android:textSize="22sp"
+        android:importantForAutofill="no"
+        android:inputType="text">
+    </EditText>
+
+    <androidx.appcompat.widget.AppCompatSpinner
+        android:id="@+id/getCandiIIT"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginTop="5dp">
+    </androidx.appcompat.widget.AppCompatSpinner>
+
+</LinearLayout>

@@ -16,4 +16,11 @@
     <string name="team1_logo">Team1_Logo</string>
     <string name="team2_logo">Team2_logo</string>
     <string name="vs">VS</string>
+    <string name="moments">Moments</string>
+    <string name="enquiry">Enquiry</string>
+    <string name="sponsors">Sponsors</string>
+    <string name="team">Team</string>
+    <string name="email_id">Email id</string>
+    <string name="name">Name</string>
+    <string name="moment_name">Moment Description</string>
 </resources>
