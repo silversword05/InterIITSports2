@@ -62,11 +62,12 @@ public class MainActivity extends AppCompatActivity {
 		Log.d("ACTIVITY", Objects.requireNonNull(MainActivity.this).toString());
 		if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED ||
 			ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED ||
-			ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED ) {
-			Log.d("AADI","fd");
-			ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
-		}
-		else {
+			ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED ||
+			ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+			Log.d("AADI", "fd");
+			ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA,
+				Manifest.permission.CALL_PHONE}, 1);
+		} else {
 			Log.d("PERMISSION", "granted");
 		}
 	}
@@ -77,8 +78,7 @@ public class MainActivity extends AppCompatActivity {
 		if (requestCode == 1) {
 			if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 				Log.d("PERMISSION", "granted");
-			}
-			else finish();
+			} else finish();
 		}
 	}
 	

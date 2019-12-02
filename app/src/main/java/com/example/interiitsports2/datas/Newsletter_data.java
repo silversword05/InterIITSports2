@@ -39,7 +39,7 @@ public class Newsletter_data implements Comparable<Newsletter_data> {
 	
 	@Override
 	public int compareTo(Newsletter_data newsletter_data) {
-		return (this.getTimestamp().compareTo(newsletter_data.getTimestamp())<0 ? -1 :
-			(this.getTimestamp().equals(newsletter_data.getTimestamp()) ? 0 : 1));
+		return (this.getTimestamp().compareTo(newsletter_data.getTimestamp())<0 ? 1 :
+			(this.getTimestamp().equals(newsletter_data.getTimestamp()) ? 0 : -1));
 	}
 }

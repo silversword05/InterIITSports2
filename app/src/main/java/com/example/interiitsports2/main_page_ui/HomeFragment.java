@@ -17,14 +17,19 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.interiitsports2.EnquiryActivity;
 import com.example.interiitsports2.R;
+import com.example.interiitsports2.adaptars.EnquiryViewAdapter;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
@@ -86,6 +91,13 @@ public class HomeFragment extends Fragment {
 			@Override
 			public void onClick(View v) {
 				catchMoments();
+			}
+		});
+		((Button)view.findViewById(R.id.enquiry)).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				setEnquiryView();
+				
 			}
 		});
 		return view;
@@ -205,5 +217,9 @@ public class HomeFragment extends Fragment {
 					alertDialog.show();
 				}
 			});
+	}
+	
+	private void setEnquiryView(){
+		Objects.requireNonNull(getContext()).startActivity(new Intent(getActivity(), EnquiryActivity.class));
 	}
 }
