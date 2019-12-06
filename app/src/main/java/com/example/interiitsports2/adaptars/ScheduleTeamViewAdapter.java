@@ -21,9 +21,12 @@ public class ScheduleTeamViewAdapter extends androidx.recyclerview.widget.Recycl
 	private ArrayList<ScheduleTeamData> scheduleTeamDataArrayList = new ArrayList<>();
 	private String game;
 	private Context context;
+	private int day;
 	
-	public ScheduleTeamViewAdapter(Context context, String game){
+	public ScheduleTeamViewAdapter(Context context, String game, int day){
 		this.context = context;
+		this.day = day;
+		this.game = game;
 		scheduleTeamDataArrayList.add(ScheduleTeamData.processJson(context));
 	}
 	

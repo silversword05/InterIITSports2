@@ -7,10 +7,12 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.interiitsports2.R;
+import com.example.interiitsports2.adaptars.DayGridAdapter;
 import com.example.interiitsports2.adaptars.ScheduleIndividualViewAdapter;
 import com.example.interiitsports2.adaptars.ScheduleTeamViewAdapter;
 
@@ -21,6 +23,7 @@ import io.paperdb.Paper;
 public class ScheduleFragment extends Fragment {
 	
 	private String[] individualGames = {"Weightlifting", "Athletics"};
+	private static final int no_of_columns = 2;
 	
 	public View onCreateView(@NonNull LayoutInflater inflater,
 							 ViewGroup container, Bundle savedInstanceState) {
@@ -31,12 +34,15 @@ public class ScheduleFragment extends Fragment {
 		assert gameName != null;
 		
 		RecyclerView recyclerView = view.findViewById(R.id.schedule_list);
-		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+		
 		
 		if(Arrays.asList(individualGames).contains(gameName)){
+			recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 			recyclerView.setAdapter(new ScheduleIndividualViewAdapter(getContext(), gameName));
 		} else {
-			recyclerView.setAdapter(new ScheduleTeamViewAdapter(getContext(), gameName));
+			recyclerView.setPadding(15, 300, 30, 20);
+			recyclerView.setLayoutManager(new GridLayoutManager(getContext() ,no_of_columns));
+			recyclerView.setAdapter(new DayGridAdapter(getContext()));
 		}
 		
 		return view;
