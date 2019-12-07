@@ -1,6 +1,7 @@
 package com.example.interiitsports2.adaptars;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,22 +12,21 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.interiitsports2.PointsTableActivity;
 import com.example.interiitsports2.R;
 import com.example.interiitsports2.datas.GoogleSheetIds;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-public class PointsGridAdapter extends androidx.recyclerview.widget.RecyclerView.Adapter<PointsGridAdapter.PointsViewHolder>{
+public class PointsGridAdapter extends androidx.recyclerview.widget.RecyclerView.Adapter<PointsGridAdapter.PointsViewHolder> {
 	
 	private List<String> arrayList;
 	private Context context;
 	private int gender;
 	private String gameName;
 	
-	public PointsGridAdapter(Context context, List<String> options, int gender, String gameName){
+	public PointsGridAdapter(Context context, List<String> options, int gender, String gameName) {
 		this.context = context;
 		arrayList = options;
 		this.gender = gender;
@@ -50,15 +50,25 @@ public class PointsGridAdapter extends androidx.recyclerview.widget.RecyclerView
 			@Override
 			public void onClick(View v) {
 				Log.d("CLICK", "CLICK");
-				if(gender==0){
-					String sheet = "Group "+(position+1);
+				if (gender == 0) {
+					String sheet = arrayList.get(position).trim();
 					String id = GoogleSheetIds.getTeamGame(gameName).get("KEY");
-					Log.d("ID", Objects.requireNonNull(id) + " "+ sheet);
+					Log.d("ID", Objects.requireNonNull(id) + " " + sheet);
+					Intent intent = new Intent(context, PointsTableActivity.class);
+					intent.putExtra("SHEET", sheet);
+					intent.putExtra("ID", id);
+					intent.putExtra("TYPE", 1);
+					context.startActivity(intent);
 				} else {
-					String sheet = "Group "+(position+1);
-					char g = arrayList.get(position).charAt(arrayList.get(position).indexOf("(")+1);
+					String sheet = arrayList.get(position).substring(0, arrayList.get(position).indexOf('(')).trim();
+					char g = arrayList.get(position).charAt(arrayList.get(position).indexOf("(") + 1);
 					String id = GoogleSheetIds.getTeamGame(gameName, g).get("KEY");
-					Log.d("ID", Objects.requireNonNull(id) + " "+ sheet);
+					Log.d("ID", Objects.requireNonNull(id) + " " + sheet);
+					Intent intent = new Intent(context, PointsTableActivity.class);
+					intent.putExtra("SHEET", sheet);
+					intent.putExtra("ID", id);
+					intent.putExtra("TYPE", 1);
+					context.startActivity(intent);
 				}
 			}
 		});
@@ -69,8 +79,9 @@ public class PointsGridAdapter extends androidx.recyclerview.widget.RecyclerView
 		return arrayList.size();
 	}
 	
-	class PointsViewHolder extends RecyclerView.ViewHolder{
+	class PointsViewHolder extends RecyclerView.ViewHolder {
 		Button dayName;
+		
 		PointsViewHolder(@NonNull View itemView) {
 			super(itemView);
 			dayName = itemView.findViewById(R.id.dayName);

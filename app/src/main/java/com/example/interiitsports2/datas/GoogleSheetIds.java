@@ -9,7 +9,7 @@ public class GoogleSheetIds {
 		"1HcUH-sP8xor9t2R09U89S3eAHtGRLL2ccbfxLQUthbU", "18DWtmoup92TvRJkYQm6IZiCnh1IA7KsPeIRfTol31zQ",
 		"11Tc_EY0_hiyQjPmwa9RXiihGkg5heJuqPpogwvyqBRQ", "19jp36DB8JBxWV06czg2GevsWyV8CsTePYxvO8s-Wimo",
 		"1b4hAxcIdZD57TMZWnuTMRDuuftHEYDQKnztU4CQkidk",
-		"1hE6ipDW_mNSDrERz0v-1R4AMgZrNs88lJ8YhyCXEi_c", "1_HKM3hlRH15JGtDXLj4xy1Tn44y6oELf1Xsb3Ucu2C",
+		"1hE6ipDW_mNSDrERz0v-1R4AMgZrNs88lJ8YhyCXEi_c", "1_HKM3hlRH15JGtDXLj4xy1Tn44y6oELf1Xsb3Ucu2CQ",
 		"1csJo0RnS83pKtrar8OgrccFwQWNBOqVBhF239xwC7So", "1eLInqTtnXUzkfxvjmCElyqzWQ9ZwkUqpdYjRbFOFuWU"};
 	private static int[] groups = {8, 4, 8, 8, 4, 4, 4, 1, 1, 1};
 	
@@ -36,6 +36,13 @@ public class GoogleSheetIds {
 	}
 	
 	public static int getGroupNos(String game) {
+		for (String x : gameNames)
+			if (x.contains(game)) return groups[Arrays.asList(gameNames).indexOf(x)];
+		return -1;
+	}
+	
+	public static int getGroupNos(String game, char gender) {
+		game = game.trim() + "(" + gender + ")";
 		for (String x : gameNames)
 			if (x.contains(game)) return groups[Arrays.asList(gameNames).indexOf(x)];
 		return -1;

@@ -1,5 +1,6 @@
 package com.example.interiitsports2.sports_page_ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.interiitsports2.PointsTableActivity;
 import com.example.interiitsports2.R;
 import com.example.interiitsports2.adaptars.DayGridAdapter;
 import com.example.interiitsports2.adaptars.PointsGridAdapter;
@@ -19,6 +21,7 @@ import com.example.interiitsports2.datas.GoogleSheetIds;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 import io.paperdb.Paper;
 
@@ -49,19 +52,28 @@ public class PointsFragment extends Fragment {
 		recyclerView = view.findViewById(R.id.points_list);
 		
 		if(Arrays.asList(noGroupGames).contains(gameName)){
+			Intent intent = new Intent(getContext(), PointsTableActivity.class);
+			intent.putExtra("SHEET", "Sheet1");
+			intent.putExtra("ID", GoogleSheetIds.getIndividualGame(gameName));
+			intent.putExtra("TYPE", 0);
+			Objects.requireNonNull(getContext()).startActivity(intent);
+			Objects.requireNonNull(getActivity()).getSupportFragmentManager().popBackStack();
 		} else populateRecyclerView(gameName);
 		
 		return view;
 	}
 	
+	
 	private void populateRecyclerView(String gameName){
 		Log.d("GAME", gameName + " "+GoogleSheetIds.getGroupNos(gameName));
-		for(int i=1; i<=GoogleSheetIds.getGroupNos(gameName); i++){
-			if(gender==0) options.add("Group "+i);
-			else {
-				options.add("Group "+i+" (M)");
-				options.add("Group "+i+" (W)");
-			}
+		if(gender==0)
+			for(int i=1; i<=GoogleSheetIds.getGroupNos(gameName); i++)
+				options.add("Group "+i);
+		else {
+			for (int i = 1; i <= GoogleSheetIds.getGroupNos(gameName, 'M'); i++)
+				options.add("Group " + i + " (M)");
+			for (int i = 1; i <= GoogleSheetIds.getGroupNos(gameName, 'W'); i++)
+				options.add("Group " + i + " (W)");
 		}
 		recyclerView.setPadding(15, 30, 30, 40);
 		recyclerView.setLayoutManager(new GridLayoutManager(getContext() ,no_of_columns));
