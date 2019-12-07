@@ -12,6 +12,9 @@
         android:layout_marginStart="25dp"
         android:layout_marginTop="40dp"
         android:text="@string/moments"
+        android:textSize="20sp"
+        android:background="@drawable/background_blue"
+        android:textColor="@android:color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -21,6 +24,9 @@
         android:layout_height="214dp"
         android:layout_marginTop="40dp"
         android:text="@string/enquiry"
+        android:textSize="20sp"
+        android:background="@drawable/background_green"
+        android:textColor="@android:color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/moments"
         app:layout_constraintTop_toTopOf="parent" />
@@ -32,6 +38,9 @@
         android:layout_marginStart="25dp"
         android:layout_marginTop="20dp"
         android:text="@string/sponsors"
+        android:textSize="20sp"
+        android:background="@drawable/background_green"
+        android:textColor="@android:color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/moments" />
 
@@ -41,37 +50,43 @@
         android:layout_height="109dp"
         android:layout_marginTop="16dp"
         android:text="@string/team"
+        android:textSize="20sp"
+        android:background="@drawable/background_blue"
+        android:textColor="@android:color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/moments"
         app:layout_constraintTop_toBottomOf="@+id/enquiry" />
 
-    <Button
-        android:id="@+id/facebook"
-        android:layout_width="65dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="66dp"
-        android:layout_marginTop="64dp"
-        android:background="@drawable/ic_facebook_icon"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sponsors" />
-
-    <Button
-        android:id="@+id/web"
-        android:layout_width="65dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="10dp"
-        android:background="@drawable/ic_web_icon"
-        app:layout_constraintStart_toEndOf="@+id/facebook"
-        app:layout_constraintTop_toTopOf="@+id/facebook" />
-
-    <Button
-        android:id="@+id/gmail"
-        android:layout_width="65dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="10dp"
-        android:background="@drawable/ic_gmail_icon"
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="70dp"
+        android:layout_marginTop="32dp"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/web"
-        app:layout_constraintTop_toTopOf="@+id/facebook" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sponsors">
+
+        <Button
+            android:id="@+id/facebook"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:background="@drawable/ic_facebook_icon"
+            tools:ignore="ButtonStyle" />
+
+        <Button
+            android:id="@+id/web"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="20dp"
+            android:background="@drawable/ic_web_icon"
+            tools:ignore="ButtonStyle" />
+
+        <Button
+            android:id="@+id/gmail"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="20dp"
+            android:background="@drawable/ic_gmail_icon"
+            tools:ignore="ButtonStyle" />
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

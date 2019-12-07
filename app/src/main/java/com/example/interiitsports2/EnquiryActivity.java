@@ -2,6 +2,7 @@ package com.example.interiitsports2;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -22,6 +23,8 @@ public class EnquiryActivity extends AppCompatActivity {
 		Objects.requireNonNull(getSupportActionBar()).setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
 		getSupportActionBar().setDisplayShowCustomEnabled(true);
 		getSupportActionBar().setCustomView(R.layout.custom_action_bar);
+		Toolbar toolbar=(Toolbar)getSupportActionBar().getCustomView().getParent();
+		toolbar.setContentInsetsAbsolute(0,0);
 		
 		setContentView(R.layout.activity_enquiry);
 		

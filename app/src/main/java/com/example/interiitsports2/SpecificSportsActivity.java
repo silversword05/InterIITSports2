@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.widget.TextView;
+import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -38,6 +39,8 @@ public class SpecificSportsActivity extends AppCompatActivity {
 		Objects.requireNonNull(getSupportActionBar()).setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
 		getSupportActionBar().setDisplayShowCustomEnabled(true);
 		getSupportActionBar().setCustomView(R.layout.custom_action_bar);
+		Toolbar toolbar=(Toolbar)getSupportActionBar().getCustomView().getParent();
+		toolbar.setContentInsetsAbsolute(0,0);
 		((TextView)getSupportActionBar().getCustomView().findViewById(R.id.heading)).setText(getIntent().getStringExtra("Game"));
 		
 		Paper.init(this);

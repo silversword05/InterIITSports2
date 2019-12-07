@@ -7,6 +7,7 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import androidx.appcompat.widget.Toolbar;
 
 import com.example.interiitsports2.main_page_ui.HomeFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -40,6 +41,8 @@ public class MainActivity extends AppCompatActivity {
 		Objects.requireNonNull(getSupportActionBar()).setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
 		getSupportActionBar().setDisplayShowCustomEnabled(true);
 		getSupportActionBar().setCustomView(R.layout.custom_action_bar);
+		Toolbar toolbar=(Toolbar)getSupportActionBar().getCustomView().getParent();
+		toolbar.setContentInsetsAbsolute(0,0);
 		
 		setContentView(R.layout.activity_main);
 		BottomNavigationView navView = findViewById(R.id.nav_view);
