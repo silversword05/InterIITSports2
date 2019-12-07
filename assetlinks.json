@@ -1,0 +1,9 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "com.example.interiitsports2",
+    "sha256_cert_fingerprints":
+    ["94:18:36:2E:B9:6A:01:37:E2:07:EA:C2:2F:83:DE:EC:B5:64:E5:61:2C:C3:36:1B:C1:65:80:1D:CD:E1:37:EC"]
+  }
+}]
