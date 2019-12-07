@@ -3,6 +3,8 @@ package com.example.interiitsports2.adaptars;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,12 +16,25 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.interiitsports2.R;
 import com.example.interiitsports2.datas.LiveMatch_data;
+import com.example.interiitsports2.datas.PointsData;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
+import org.json.JSONArray;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 public class LiveViewAdapter extends androidx.recyclerview.widget.RecyclerView.Adapter<LiveViewAdapter.LiveViewHolder> {
 	
@@ -29,7 +44,35 @@ public class LiveViewAdapter extends androidx.recyclerview.widget.RecyclerView.A
 	
 	public LiveViewAdapter(Context context, String game){
 		this.context = context;
-		liveMatchList.add(LiveMatch_data.processJson(context));
+		fetchData(game);
+	}
+	
+	private void fetchData(final String game){
+		Uri uri = new Uri.Builder()
+			.scheme("https")
+			.authority("interiit.com")
+			.appendPath("getLiveMatches_Details_Android")
+			.appendPath(game)
+			.build();
+		RequestQueue queue = Volley.newRequestQueue(context);
+		StringRequest stringRequest = new StringRequest(Request.Method.GET, uri.toString(),
+			new Response.Listener<String>() {
+				@Override
+				public void onResponse(String response) {
+					JsonArray jsonArray = (JsonArray) JsonParser.parseString(response);
+					for(int i=0; i<jsonArray.size(); i++) {
+						Log.d("DATA LIVE", jsonArray.get(i).getAsJsonObject().toString());
+						liveMatchList.add(LiveMatch_data.processJson(context, jsonArray.get(i).getAsJsonObject()));
+					}
+					notifyDataSetChanged();
+				}
+			}, new Response.ErrorListener() {
+			@Override
+			public void onErrorResponse(VolleyError error) {
+				Log.d("DATA", Objects.requireNonNull(error.getMessage()));
+			}
+		});
+		queue.add(stringRequest);
 	}
 	
 	@NonNull

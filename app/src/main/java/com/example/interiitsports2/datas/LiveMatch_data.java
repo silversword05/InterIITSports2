@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
 
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
@@ -89,10 +90,16 @@ public class LiveMatch_data {
 		return null;
 	}
 	
-	public static LiveMatch_data processJson(Context context){
-		JsonObject jsonObject = JsonParser.parseString("{\"score1\": \"32333\",\"score2\":\"31233\",\"commentry\":\"Aadi\nSwadipto\nMondal\nis\nMondal\nSwadipto\nAadi\",\"team1\":\"IIT_Bhilai\",\"team2\":\"IIT_BHU\", \"venue\":\"Gymkhana\", \"type\":\"Final\"}").getAsJsonObject();
-		return new LiveMatch_data(jsonObject.get("team1").getAsString(), jsonObject.get("team2").getAsString(), jsonObject.get("score1").getAsString(), jsonObject.get("score2").getAsString(),
-			jsonObject.get("commentry").getAsString(), jsonObject.get("venue").getAsString(), jsonObject.get("type").getAsString(), context);
+	public static LiveMatch_data processJson(Context context, JsonObject jsonObject){
+		Log.d("NAME SPORT", jsonObject.get("sport_name").toString());
+		String score1 = (jsonObject.has("score1"))?jsonObject.get("score1").toString():"";
+		Log.d("SCORE 1", score1);
+		String score2 = (jsonObject.has("score2"))?jsonObject.get("score2").toString():"";
+		Log.d("SCORE 2", score2);
+		String clg1 = jsonObject.get("clg1").getAsString().trim().replace(' ','_');
+		String clg2 = jsonObject.get("clg2").getAsString().trim().replace(' ','_');
+		return new LiveMatch_data(clg1, clg2, score1, score2,
+			jsonObject.get("commentry").getAsString(), jsonObject.get("venue_time").getAsString(), jsonObject.get("level").getAsString(), context);
 		
 	}
 	
