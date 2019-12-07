@@ -2,91 +2,99 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="#f0ebeb"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/moments"
-        android:layout_width="166dp"
-        android:layout_height="150dp"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="40dp"
-        android:text="@string/moments"
-        android:textSize="20sp"
-        android:background="@drawable/background_blue"
-        android:textColor="@android:color/white"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/enquiry"
-        android:layout_width="133dp"
-        android:layout_height="214dp"
-        android:layout_marginTop="40dp"
-        android:text="@string/enquiry"
-        android:textSize="20sp"
-        android:background="@drawable/background_green"
-        android:textColor="@android:color/white"
+    <LinearLayout
+        android:id="@+id/home_first_row"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/moments"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/sponsors"
-        android:layout_width="167dp"
-        android:layout_height="171dp"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="20dp"
-        android:text="@string/sponsors"
-        android:textSize="20sp"
-        android:background="@drawable/background_green"
-        android:textColor="@android:color/white"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/moments" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <Button
-        android:id="@+id/team"
-        android:layout_width="138dp"
-        android:layout_height="109dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/team"
-        android:textSize="20sp"
-        android:background="@drawable/background_blue"
-        android:textColor="@android:color/white"
+        <Button
+            android:id="@+id/moments"
+            android:layout_width="166dp"
+            android:layout_height="200dp"
+            android:background="@drawable/moments"
+            tools:ignore="ButtonStyle" />
+
+        <Button
+            android:id="@+id/enquiry"
+            android:layout_width="166dp"
+            android:layout_height="200dp"
+            android:layout_marginStart="10dp"
+            android:background="@drawable/enquiry"
+            tools:ignore="ButtonStyle" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/moments"
-        app:layout_constraintTop_toBottomOf="@+id/enquiry" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/home_first_row">
+
+        <Button
+            android:id="@+id/sponsors"
+            android:layout_width="160dp"
+            android:layout_height="200dp"
+            android:background="@drawable/sponsors"
+            tools:ignore="ButtonStyle" />
+
+        <Button
+            android:id="@+id/team"
+            android:layout_width="160dp"
+            android:layout_height="200dp"
+            android:layout_marginStart="10dp"
+            android:background="@drawable/team"
+            tools:ignore="ButtonStyle" />
+    </LinearLayout>
+
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="70dp"
-        android:layout_marginTop="32dp"
         android:orientation="horizontal"
+        android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sponsors">
-
-        <Button
-            android:id="@+id/facebook"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:background="@drawable/ic_facebook_icon"
-            tools:ignore="ButtonStyle" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
         <Button
             android:id="@+id/web"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_marginStart="20dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:background="@drawable/ic_web_icon"
             tools:ignore="ButtonStyle" />
 
         <Button
-            android:id="@+id/gmail"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:id="@+id/facebook"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_marginStart="20dp"
-            android:background="@drawable/ic_gmail_icon"
+            android:background="@drawable/ic_facebook_icon"
+            tools:ignore="ButtonStyle" />
+
+        <Button
+            android:id="@+id/instagram"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="20dp"
+            android:background="@drawable/ic_instagram_icon"
+            tools:ignore="ButtonStyle" />
+
+        <Button
+            android:id="@+id/youtube"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="20dp"
+            android:background="@drawable/ic_youtube_icon"
             tools:ignore="ButtonStyle" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,30 +4,29 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
-import androidx.appcompat.widget.Toolbar;
-
-import com.example.interiitsports2.main_page_ui.HomeFragment;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.firebase.appindexing.Action;
-import com.google.firebase.appindexing.FirebaseAppIndex;
-import com.google.firebase.appindexing.FirebaseUserActions;
-import com.google.firebase.appindexing.Indexable;
-import com.google.firebase.appindexing.builders.Actions;
-import com.theartofdev.edmodo.cropper.CropImage;
-import com.theartofdev.edmodo.cropper.CropImageView;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.appindexing.Action;
+import com.google.firebase.appindexing.FirebaseAppIndex;
+import com.google.firebase.appindexing.FirebaseUserActions;
+import com.google.firebase.appindexing.Indexable;
+import com.google.firebase.appindexing.builders.Actions;
 
 import java.util.Objects;
 
@@ -41,8 +40,10 @@ public class MainActivity extends AppCompatActivity {
 		Objects.requireNonNull(getSupportActionBar()).setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
 		getSupportActionBar().setDisplayShowCustomEnabled(true);
 		getSupportActionBar().setCustomView(R.layout.custom_action_bar);
-		Toolbar toolbar=(Toolbar)getSupportActionBar().getCustomView().getParent();
-		toolbar.setContentInsetsAbsolute(0,0);
+		Toolbar toolbar = (Toolbar) getSupportActionBar().getCustomView().getParent();
+		toolbar.setContentInsetsAbsolute(0, 0);
+		getWindow().getDecorView().setSystemUiVisibility( View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+		getWindow().setStatusBarColor(Color.WHITE);
 		
 		setContentView(R.layout.activity_main);
 		BottomNavigationView navView = findViewById(R.id.nav_view);

@@ -92,9 +92,9 @@ public class LiveMatch_data {
 	
 	public static LiveMatch_data processJson(Context context, JsonObject jsonObject){
 		Log.d("NAME SPORT", jsonObject.get("sport_name").toString());
-		String score1 = (jsonObject.has("score1"))?jsonObject.get("score1").toString():"";
+		String score1 = (jsonObject.has("score1"))?jsonObject.get("score1").getAsString():"";
 		Log.d("SCORE 1", score1);
-		String score2 = (jsonObject.has("score2"))?jsonObject.get("score2").toString():"";
+		String score2 = (jsonObject.has("score2"))?jsonObject.get("score2").getAsString():"";
 		Log.d("SCORE 2", score2);
 		String clg1 = jsonObject.get("clg1").getAsString().trim().replace(' ','_');
 		String clg2 = jsonObject.get("clg2").getAsString().trim().replace(' ','_');

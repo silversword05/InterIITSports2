@@ -2,7 +2,9 @@ package com.example.interiitsports2;
 
 import android.content.DialogInterface;
 import android.content.pm.ActivityInfo;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 import androidx.appcompat.widget.Toolbar;
 
@@ -42,6 +44,8 @@ public class SpecificSportsActivity extends AppCompatActivity {
 		Toolbar toolbar=(Toolbar)getSupportActionBar().getCustomView().getParent();
 		toolbar.setContentInsetsAbsolute(0,0);
 		((TextView)getSupportActionBar().getCustomView().findViewById(R.id.heading)).setText(getIntent().getStringExtra("Game"));
+		getWindow().getDecorView().setSystemUiVisibility( View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+		getWindow().setStatusBarColor(Color.WHITE);
 		
 		Paper.init(this);
 		Paper.book().write("Game", Objects.requireNonNull(getIntent().getStringExtra("Game")));

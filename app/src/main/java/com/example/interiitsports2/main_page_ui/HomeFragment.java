@@ -75,18 +75,18 @@ public class HomeFragment extends Fragment {
 				
 			}
 		});
-		((Button)view.findViewById(R.id.gmail)).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Intent intent=new Intent(Intent.ACTION_SEND);
-				String[] recipients={"interiit2019@gmail.com"};
-				intent.putExtra(Intent.EXTRA_EMAIL, recipients);
-				intent.putExtra(Intent.EXTRA_SUBJECT,"Mail from the app:");
-				intent.setType("text/html");
-				intent.setPackage("com.google.android.gm");
-				startActivity(Intent.createChooser(intent, "Send mail"));
-			}
-		});
+//		((Button)view.findViewById(R.id.gmail)).setOnClickListener(new View.OnClickListener() {
+//			@Override
+//			public void onClick(View v) {
+//				Intent intent=new Intent(Intent.ACTION_SEND);
+//				String[] recipients={"interiit2019@gmail.com"};
+//				intent.putExtra(Intent.EXTRA_EMAIL, recipients);
+//				intent.putExtra(Intent.EXTRA_SUBJECT,"Mail from the app:");
+//				intent.setType("text/html");
+//				intent.setPackage("com.google.android.gm");
+//				startActivity(Intent.createChooser(intent, "Send mail"));
+//			}
+//		});
 		((Button)view.findViewById(R.id.moments)).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {

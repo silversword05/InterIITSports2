@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#1d1d1d"
+    android:background="#FFFFFF"
     android:padding="5dp">
 
     <ImageView
@@ -20,10 +20,10 @@
         android:layout_alignParentTop="true"
         android:layout_toEndOf="@+id/logo_image"
         android:layout_toStartOf="@id/kgp_logo"
-        android:fontFamily="@font/oswaldstencil"
+        android:fontFamily="@font/myriadpro_regular"
         android:text="@string/inter_iit_sports_meet_n2019"
         android:textAlignment="center"
-        android:textColor="@android:color/white"
+        android:textColor="@android:color/black"
         android:textSize="20sp" />
 
     <ImageView
