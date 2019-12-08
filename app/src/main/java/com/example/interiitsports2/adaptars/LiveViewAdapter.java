@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -38,6 +39,7 @@ public class LiveViewAdapter extends androidx.recyclerview.widget.RecyclerView.A
 	private ArrayList<LiveMatch_data> liveMatchList = new ArrayList<>();
 	private Context context;
 	private String game;
+	private RecyclerView recyclerView;
 	
 	private Handler mHandler;
 	private Runnable mStatusChecker = new Runnable() {
@@ -46,15 +48,16 @@ public class LiveViewAdapter extends androidx.recyclerview.widget.RecyclerView.A
 			try {
 				fetchData();
 			} finally {
-				mHandler.postDelayed(mStatusChecker, 60000);
+				mHandler.postDelayed(mStatusChecker, 30000);
 			}
 		}
 	};
 	
-	public LiveViewAdapter(Context context, String game) {
+	public LiveViewAdapter(Context context, String game, RecyclerView recyclerView) {
 		this.context = context;
 		this.game = game;
 		mHandler = new Handler();
+		this.recyclerView = recyclerView;
 		mStatusChecker.run();
 	}
 	
@@ -84,7 +87,9 @@ public class LiveViewAdapter extends androidx.recyclerview.widget.RecyclerView.A
 						Log.d("DATA LIVE", jsonArray.get(i).getAsJsonObject().toString());
 						liveMatchList.add(LiveMatch_data.processJson(context, jsonArray.get(i).getAsJsonObject()));
 					}
+					if(liveMatchList.isEmpty()) Toast.makeText(context, "No matches are live now", Toast.LENGTH_SHORT).show();
 					notifyDataSetChanged();
+					recyclerView.scheduleLayoutAnimation();
 				}
 			}, new Response.ErrorListener() {
 			@Override

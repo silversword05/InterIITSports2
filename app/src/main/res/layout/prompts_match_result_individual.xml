@@ -7,7 +7,7 @@
 
 
     <TextView
-        android:id="@+id/winner"
+        android:id="@+id/win1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@font/myriadpro_regular"
@@ -16,7 +16,7 @@
         android:layout_weight="1" />
 
     <TextView
-        android:id="@+id/runner"
+        android:id="@+id/win2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@font/myriadpro_regular"
@@ -25,7 +25,16 @@
         android:layout_weight="1" />
 
     <TextView
-        android:id="@+id/status"
+        android:id="@+id/win3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/myriadpro_regular"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        android:layout_weight="1" />
+
+    <TextView
+        android:id="@+id/win4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@font/myriadpro_regular"

@@ -56,6 +56,7 @@ public class PointsFragment extends Fragment {
 			intent.putExtra("SHEET", "Sheet1");
 			intent.putExtra("ID", GoogleSheetIds.getIndividualGame(gameName));
 			intent.putExtra("TYPE", 0);
+			intent.putExtra("GAME", gameName);
 			Objects.requireNonNull(getContext()).startActivity(intent);
 			Objects.requireNonNull(getActivity()).getSupportFragmentManager().popBackStack();
 		} else populateRecyclerView(gameName);

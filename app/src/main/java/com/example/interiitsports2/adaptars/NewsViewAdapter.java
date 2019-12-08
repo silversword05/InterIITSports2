@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -35,9 +36,11 @@ public class NewsViewAdapter extends androidx.recyclerview.widget.RecyclerView.A
 	
 	private Context context;
 	private ArrayList<Newsletter_data> newsletter_data = new ArrayList<>();
+	private RecyclerView recyclerView;
 	
-	public NewsViewAdapter(Context context){
+	public NewsViewAdapter(Context context, RecyclerView recyclerView){
 		this.context = context;
+		this.recyclerView = recyclerView;
 		fetchData();
 	}
 	
@@ -52,7 +55,9 @@ public class NewsViewAdapter extends androidx.recyclerview.widget.RecyclerView.A
 						newsletter_data.add(new Newsletter_data(document.getData()));
 					}
 					Collections.sort(newsletter_data);
+					if (newsletter_data.isEmpty()) Toast.makeText(context, "No newletters till now", Toast.LENGTH_SHORT).show();
 					notifyDataSetChanged();
+					recyclerView.scheduleLayoutAnimation();
 				} else {
 					Log.d("FIREBASE", "Error getting documents: ", task.getException());
 				}

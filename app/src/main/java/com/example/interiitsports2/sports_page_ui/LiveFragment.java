@@ -5,6 +5,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LayoutAnimationController;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -35,7 +37,9 @@ public class LiveFragment extends Fragment {
 		
 		RecyclerView recyclerView = view.findViewById(R.id.live_list);
 		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-		liveViewAdapter = new LiveViewAdapter(getContext(), gameName);
+		LayoutAnimationController animation = AnimationUtils.loadLayoutAnimation(getContext(), R.anim.layout_animation_fall_down);
+		recyclerView.setLayoutAnimation(animation);
+		liveViewAdapter = new LiveViewAdapter(getContext(), gameName, recyclerView);
 		recyclerView.setAdapter(liveViewAdapter);
 		
 		Log.d("Game NAme", gameName);

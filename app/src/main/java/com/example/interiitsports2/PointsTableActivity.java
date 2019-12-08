@@ -11,6 +11,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 import com.example.interiitsports2.adaptars.PointsDataAdapter;
 
@@ -28,6 +29,7 @@ public class PointsTableActivity extends AppCompatActivity {
 		getSupportActionBar().setCustomView(R.layout.custom_action_bar);
 		Toolbar toolbar=(Toolbar)getSupportActionBar().getCustomView().getParent();
 		toolbar.setContentInsetsAbsolute(0,0);
+		((TextView)getSupportActionBar().getCustomView().findViewById(R.id.heading)).setText(getIntent().getStringExtra("GAME"));
 		getWindow().getDecorView().setSystemUiVisibility( View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
 		getWindow().setStatusBarColor(Color.WHITE);
 		

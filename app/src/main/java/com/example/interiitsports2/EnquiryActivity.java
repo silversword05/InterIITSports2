@@ -6,16 +6,37 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.interiitsports2.adaptars.EnquiryViewAdapter;
+import com.example.interiitsports2.datas.LiveMatch_data;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonParser;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 
 import java.util.Objects;
 
+import io.paperdb.Paper;
+
 public class EnquiryActivity extends AppCompatActivity {
+	
+	private String complaintText;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -35,5 +56,58 @@ public class EnquiryActivity extends AppCompatActivity {
 		RecyclerView recyclerView = findViewById(R.id.enquiry_list);
 		recyclerView.setLayoutManager(new LinearLayoutManager(this));
 		recyclerView.setAdapter(new EnquiryViewAdapter(this));
+		
+		((Button) findViewById(R.id.complaintButton)).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				complaintText = ((TextView)EnquiryActivity.this.findViewById(R.id.complaintText)).getText().toString();
+				IntentIntegrator intentIntegrator = new IntentIntegrator(EnquiryActivity.this);
+				intentIntegrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE_TYPES);
+				intentIntegrator.setBeepEnabled(false);
+				intentIntegrator.setCameraId(0);
+				intentIntegrator.setPrompt("SCAN QR");
+				intentIntegrator.setBarcodeImageEnabled(false);
+				intentIntegrator.initiateScan();
+			}
+		});
+	}
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		IntentResult Result = IntentIntegrator.parseActivityResult(requestCode , resultCode ,data);
+		if(Result != null){
+			if(Result.getContents() == null){
+				Toast.makeText(this, "Sorry, we cannot scan", Toast.LENGTH_SHORT).show();
+			}
+			else {
+				Uri uri = new Uri.Builder()
+					.scheme("https")
+					.authority("interiit.com")
+					.appendPath("fileInquiry")
+					.appendPath(Result.getContents())
+					.appendPath(complaintText)
+					.build();
+				RequestQueue queue = Volley.newRequestQueue(EnquiryActivity.this);
+				StringRequest stringRequest = new StringRequest(Request.Method.GET, uri.toString(),
+					new Response.Listener<String>() {
+						@Override
+						public void onResponse(String response) {
+							Toast.makeText(EnquiryActivity.this, "You complaint is successfully accepted", Toast.LENGTH_SHORT).show();
+						}
+					}, new Response.ErrorListener() {
+					@Override
+					public void onErrorResponse(VolleyError error) {
+						try {
+							Toast.makeText(EnquiryActivity.this, "Sorry, we cannot accept complaints now", Toast.LENGTH_SHORT).show();
+							Log.d("ERROR", Objects.requireNonNull(error.getMessage()));
+						} catch (Exception ignored) {}
+					}
+				});
+				queue.add(stringRequest);
+			}
+		}
+		else {
+			super.onActivityResult(requestCode , resultCode , data);
+		}
 	}
 }

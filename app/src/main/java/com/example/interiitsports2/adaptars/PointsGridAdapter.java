@@ -58,6 +58,7 @@ public class PointsGridAdapter extends androidx.recyclerview.widget.RecyclerView
 					intent.putExtra("SHEET", sheet);
 					intent.putExtra("ID", id);
 					intent.putExtra("TYPE", 1);
+					intent.putExtra("GAME", gameName);
 					context.startActivity(intent);
 				} else {
 					String sheet = arrayList.get(position).substring(0, arrayList.get(position).indexOf('(')).trim();
@@ -68,6 +69,7 @@ public class PointsGridAdapter extends androidx.recyclerview.widget.RecyclerView
 					intent.putExtra("SHEET", sheet);
 					intent.putExtra("ID", id);
 					intent.putExtra("TYPE", 1);
+					intent.putExtra("GAME", gameName);
 					context.startActivity(intent);
 				}
 			}

@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -38,11 +39,13 @@ public class ScheduleTeamViewAdapter extends androidx.recyclerview.widget.Recycl
 	private String game;
 	private Context context;
 	private int day;
+	private RecyclerView recyclerView;
 	
-	public ScheduleTeamViewAdapter(Context context, String game, int day){
+	public ScheduleTeamViewAdapter(Context context, String game, int day, RecyclerView recyclerView){
 		this.context = context;
 		this.day = day;
 		this.game = game;
+		this.recyclerView = recyclerView;
 		fetchData();
 	}
 	
@@ -65,6 +68,8 @@ public class ScheduleTeamViewAdapter extends androidx.recyclerview.widget.Recycl
 						scheduleTeamDataArrayList.add(ScheduleTeamData.processJson(context, jsonArray.get(i).getAsJsonObject()));
 					}
 					notifyDataSetChanged();
+					if(scheduleTeamDataArrayList.isEmpty()) Toast.makeText(context, "No matches till now", Toast.LENGTH_SHORT).show();
+					recyclerView.scheduleLayoutAnimation();
 				}
 			}, new Response.ErrorListener() {
 			@Override

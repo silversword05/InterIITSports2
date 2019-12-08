@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LayoutAnimationController;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -38,7 +40,9 @@ public class ScheduleFragment extends Fragment {
 		
 		if(Arrays.asList(individualGames).contains(gameName)){
 			recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-			recyclerView.setAdapter(new ScheduleIndividualViewAdapter(getContext(), gameName));
+			LayoutAnimationController animation = AnimationUtils.loadLayoutAnimation(getContext(), R.anim.layout_animation_fall_down);
+			recyclerView.setLayoutAnimation(animation);
+			recyclerView.setAdapter(new ScheduleIndividualViewAdapter(getContext(), gameName, recyclerView));
 		} else {
 			recyclerView.setPadding(15, 10, 30, 20);
 			recyclerView.setLayoutManager(new GridLayoutManager(getContext() ,no_of_columns));

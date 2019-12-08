@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LayoutAnimationController;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -19,8 +21,10 @@ public class NewsletterFragment extends Fragment {
 							 ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_newsletter, null);
 		RecyclerView recyclerView = view.findViewById(R.id.news_list);
+		LayoutAnimationController animation = AnimationUtils.loadLayoutAnimation(getContext(), R.anim.layout_animation_fall_down);
+		recyclerView.setLayoutAnimation(animation);
 		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-		recyclerView.setAdapter(new NewsViewAdapter(getContext()));
+		recyclerView.setAdapter(new NewsViewAdapter(getContext(), recyclerView));
 		return view;
 	}
 }

@@ -93,7 +93,7 @@ public class ScheduleTeamData {
 		String clg1 = jsonObject.get("clg1").getAsString().trim().replace(' ','_');
 		String clg2 = jsonObject.get("clg2").getAsString().trim().replace(' ','_');
 		return new ScheduleTeamData(clg1, clg2, jsonObject.get("venue_time").getAsString(), jsonObject.get("level").getAsString(),
-			jsonObject.get("winner").toString(), jsonObject.get("runner").toString(), jsonObject.get("status").getAsString(), context);
+			jsonObject.get("winner").getAsString(), jsonObject.get("runner").getAsString(), jsonObject.get("status").getAsString(), context);
 	}
 	
 }
