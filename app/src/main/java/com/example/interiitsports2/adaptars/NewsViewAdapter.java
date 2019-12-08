@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,10 +38,12 @@ public class NewsViewAdapter extends androidx.recyclerview.widget.RecyclerView.A
 	private Context context;
 	private ArrayList<Newsletter_data> newsletter_data = new ArrayList<>();
 	private RecyclerView recyclerView;
+	private ProgressBar progressBar;
 	
-	public NewsViewAdapter(Context context, RecyclerView recyclerView){
+	public NewsViewAdapter(Context context, RecyclerView recyclerView, ProgressBar progressBar){
 		this.context = context;
 		this.recyclerView = recyclerView;
+		this.progressBar = progressBar;
 		fetchData();
 	}
 	
@@ -57,6 +60,7 @@ public class NewsViewAdapter extends androidx.recyclerview.widget.RecyclerView.A
 					Collections.sort(newsletter_data);
 					if (newsletter_data.isEmpty()) Toast.makeText(context, "No newletters till now", Toast.LENGTH_SHORT).show();
 					notifyDataSetChanged();
+					progressBar.setVisibility(View.GONE);
 					recyclerView.scheduleLayoutAnimation();
 				} else {
 					Log.d("FIREBASE", "Error getting documents: ", task.getException());

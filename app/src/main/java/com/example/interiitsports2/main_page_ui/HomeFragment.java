@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -40,6 +41,8 @@ import com.google.firebase.storage.OnPausedListener;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
@@ -95,7 +98,14 @@ public class HomeFragment extends Fragment {
 		((Button)view.findViewById(R.id.moments)).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				catchMoments();
+				IntentIntegrator intentIntegrator = IntentIntegrator.forSupportFragment(HomeFragment.this);
+				intentIntegrator.setDesiredBarcodeFormats(IntentIntegrator.ALL_CODE_TYPES);
+				intentIntegrator.setBeepEnabled(false);
+				intentIntegrator.setCameraId(0);
+				intentIntegrator.setPrompt("SCAN QR");
+				intentIntegrator.setBarcodeImageEnabled(false);
+				intentIntegrator.initiateScan();
+				//catchMoments();
 			}
 		});
 		((Button)view.findViewById(R.id.enquiry)).setOnClickListener(new View.OnClickListener() {
@@ -141,7 +151,6 @@ public class HomeFragment extends Fragment {
 		builder.setView(promptsView);
 		builder.setTitle("Moments");
 		final EditText name = promptsView.findViewById(R.id.getCandiName);
-		final EditText email = promptsView.findViewById(R.id.getCandiEmail);
 		final EditText moment = promptsView.findViewById(R.id.getCandimoment);
 		final Spinner spinner = promptsView.findViewById(R.id.getCandiIIT);
 		ArrayList<String> arrayList = new ArrayList<>();
@@ -157,9 +166,7 @@ public class HomeFragment extends Fragment {
 		builder.setPositiveButton("Add your Moment", new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				Paper.init(Objects.requireNonNull(getContext()));
 				Paper.book().write("name", String.valueOf(name.getText()));
-				Paper.book().write("email", String.valueOf(email.getText()));
 				Paper.book().write("moment", String.valueOf(moment.getText()));
 				Paper.book().write("iit", String.valueOf(spinner.getSelectedItem()));
 				Log.d("DETAILS", String.valueOf(name.getText()));
@@ -179,6 +186,7 @@ public class HomeFragment extends Fragment {
 			Log.d("IMAGE URI", imageUri.toString());
 			final StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
 			final String filename = RingtoneManager.getRingtone(getContext(), imageUri).getTitle(getContext());
+			Toast.makeText(getContext(), "Please wait until we process your request", Toast.LENGTH_SHORT).show();
 			mStorageRef.child(Paper.book().read("email")+"/"+filename).putFile(imageUri)
 				.addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
 					@Override
@@ -210,6 +218,21 @@ public class HomeFragment extends Fragment {
 				}
 			});
 		}
+		if(requestCode == IntentIntegrator.REQUEST_CODE && resultCode == Activity.RESULT_OK){
+			IntentResult Result = IntentIntegrator.parseActivityResult(requestCode , resultCode ,data);
+			if(Result != null){
+				if(Result.getContents() == null){
+					Log.d("QR SCAN" , "cancelled scan");
+					Toast.makeText(getContext(), "Sorry we cannot make a scan now", Toast.LENGTH_SHORT).show();
+				}
+				else {
+					String email = Result.getContents().substring(0, Result.getContents().indexOf('^'));
+					Paper.init(Objects.requireNonNull(getContext()));
+					Paper.book().write("email", email);
+					catchMoments();
+				}
+			}
+		}
 	}
 	
 	private void addMomentToFirestore(Uri uri){
@@ -226,16 +249,7 @@ public class HomeFragment extends Fragment {
 				@Override
 				public void onSuccess(Void aVoid) {
 					Log.d("Upload", "DocumentSnapshot successfully written!");
-					AlertDialog alertDialog = new AlertDialog.Builder(HomeFragment.this.getContext()).create();
-					alertDialog.setTitle("Moments Added");
-					alertDialog.setMessage("Your moment is successfully added");
-					alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-						new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog, int which) {
-								dialog.dismiss();
-							}
-						});
-					alertDialog.show();
+					Toast.makeText(getContext(), "Your moment is successfully added", Toast.LENGTH_SHORT).show();
 				}
 			});
 	}
