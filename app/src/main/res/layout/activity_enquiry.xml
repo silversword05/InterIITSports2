@@ -34,7 +34,7 @@
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/complaintText" />
+        app:layout_constraintTop_toBottomOf="@+id/complaintType" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/enquiry_list"
@@ -50,5 +50,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/complaintButton"
         app:layout_constraintVertical_bias="0.0" />
+
+    <Spinner
+        android:id="@+id/complaintType"
+        android:background="@drawable/team_match_card_background"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_width="215dp"
+        android:layout_height="37dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/complaintText" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -171,7 +171,7 @@ public class HomeFragment extends Fragment {
 				Paper.book().write("iit", String.valueOf(spinner.getSelectedItem()));
 				Log.d("DETAILS", String.valueOf(name.getText()));
 				dialog.cancel();
-				CropImage.activity().setGuidelines(CropImageView.Guidelines.ON).start(getContext(), HomeFragment.this);
+				CropImage.activity().setGuidelines(CropImageView.Guidelines.ON).start(Objects.requireNonNull(getContext()), HomeFragment.this);
 			}
 		}).show();
 	}

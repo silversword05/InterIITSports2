@@ -17,9 +17,9 @@ import com.example.interiitsports2.SpecificSportsActivity;
 
 public class SportsViewAdapter extends androidx.recyclerview.widget.RecyclerView.Adapter<SportsViewAdapter.SportsViewHolder> {
 	
-	private String[] sports_list = {"Basketball", "Football", "Cricket", "Tennis", "Hockey", "Chess", "Weightlifting", "Athletics"};
-	private int[] icons = {R.drawable.basketball, R.drawable.football, R.drawable.cricket, R.drawable.tennis, R.drawable.hockey, R.drawable.chess,
-		R.drawable.weightliifing, R.drawable.athletics};
+	private String[] sports_list = { "Athletics", "Basketball", "Chess", "Cricket", "Football", "Hockey", "Tennis", "Weightlifting"};
+	private int[] icons = {R.drawable.athletics, R.drawable.basketball, R.drawable.chess, R.drawable.cricket, R.drawable.football,  R.drawable.hockey, R.drawable.tennis,
+		R.drawable.weightliifing};
 	private Context context;
 	
 	public SportsViewAdapter(Context context){

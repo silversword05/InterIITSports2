@@ -13,7 +13,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,6 +32,7 @@ import com.google.gson.JsonParser;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
+import java.util.Arrays;
 import java.util.Objects;
 
 import io.paperdb.Paper;
@@ -37,6 +40,8 @@ import io.paperdb.Paper;
 public class EnquiryActivity extends AppCompatActivity {
 	
 	private String complaintText;
+	private String[] complaintTypes = {"Select Category", "Accomodation", "Sports Event", "Transportation", "Mess", "Miscellaneous"};
+	private String typeComplaint;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -57,10 +62,18 @@ public class EnquiryActivity extends AppCompatActivity {
 		recyclerView.setLayoutManager(new LinearLayoutManager(this));
 		recyclerView.setAdapter(new EnquiryViewAdapter(this));
 		
+		final Spinner spinner = findViewById(R.id.complaintType);
+		ArrayAdapter arrayAdapter = new ArrayAdapter<>(this,R.layout.prompt_comments_text, Arrays.asList(complaintTypes));
+		spinner.setAdapter(arrayAdapter);
 		((Button) findViewById(R.id.complaintButton)).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				complaintText = ((TextView)EnquiryActivity.this.findViewById(R.id.complaintText)).getText().toString();
+				typeComplaint = String.valueOf(spinner.getSelectedItem());
+				if(spinner.getSelectedItemPosition()==0){
+					Toast.makeText(EnquiryActivity.this, "Please Select a category", Toast.LENGTH_SHORT).show();
+					return;
+				}
 				IntentIntegrator intentIntegrator = new IntentIntegrator(EnquiryActivity.this);
 				intentIntegrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE_TYPES);
 				intentIntegrator.setBeepEnabled(false);
@@ -85,6 +98,7 @@ public class EnquiryActivity extends AppCompatActivity {
 					.authority("interiit.com")
 					.appendPath("fileInquiry")
 					.appendPath(Result.getContents())
+					.appendPath(typeComplaint)
 					.appendPath(complaintText)
 					.build();
 				RequestQueue queue = Volley.newRequestQueue(EnquiryActivity.this);
