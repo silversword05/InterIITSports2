@@ -47,7 +47,7 @@ public class ScheduleFragment extends Fragment {
 			recyclerView.setAdapter(new ScheduleIndividualViewAdapter(getContext(), gameName, recyclerView, progressBar));
 		} else {
 			progressBar.setVisibility(View.GONE);
-			recyclerView.setPadding(15, 10, 30, 20);
+			recyclerView.setPadding(15, 10, 30, 30);
 			recyclerView.setLayoutManager(new GridLayoutManager(getContext() ,no_of_columns));
 			recyclerView.setAdapter(new DayGridAdapter(getContext()));
 		}

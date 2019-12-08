@@ -24,12 +24,12 @@ public class DayGridAdapter extends androidx.recyclerview.widget.RecyclerView.Ad
 	
 	private ArrayList<Integer> days;
 	private Context context;
-	private int[] daysid = {R.drawable.day0, R.drawable.day1, R.drawable.day2, R.drawable.day3, R.drawable.day4, R.drawable.day5, R.drawable.day6, R.drawable.day7};
+	private int[] daysid = {R.drawable.day0, R.drawable.day1, R.drawable.day2, R.drawable.day3, R.drawable.day4, R.drawable.day5, R.drawable.day6, R.drawable.day7, R.drawable.day8};
 	
 	public DayGridAdapter(Context context){
 		this.context = context;
 		days = new ArrayList<>();
-		for(int i=0; i<=7; i++){
+		for(int i=1; i<=9; i++){
 			days.add(i);
 		}
 	}
@@ -39,7 +39,7 @@ public class DayGridAdapter extends androidx.recyclerview.widget.RecyclerView.Ad
 	public DayViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 		View dayEditableView = LayoutInflater.from(parent.getContext()).inflate(R.layout.day_grid, parent, false);
 		GridLayoutManager.LayoutParams params = (GridLayoutManager.LayoutParams) dayEditableView.getLayoutParams();
-		params.height = 250;
+		params.height = 200;
 		dayEditableView.setLayoutParams(params);
 		return new DayGridAdapter.DayViewHolder(dayEditableView);
 	}
@@ -47,11 +47,10 @@ public class DayGridAdapter extends androidx.recyclerview.widget.RecyclerView.Ad
 	@Override
 	public void onBindViewHolder(@NonNull DayViewHolder holder, final int position) {
 		holder.itemView.setBackground(context.getDrawable(daysid[position]));
-		holder.dayName.setBackgroundColor(Color.TRANSPARENT);
+		holder.dayName.setVisibility(View.GONE);
 		holder.itemView.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				//Toast.makeText(context, "Day "+position, Toast.LENGTH_SHORT).show();
 				Paper.book().write("Day", position);
 				Intent intent = new Intent(context, PreviousTeamSchedule.class);
 				context.startActivity(intent);

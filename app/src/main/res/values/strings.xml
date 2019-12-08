@@ -25,4 +25,5 @@
     <string name="moment_name">Moment Description</string>
     <string name="complaint_description">Complaint Description</string>
     <string name="scan_qr_and_submit">Scan QR and submit</string>
+    <string name="splash">Splash</string>
 </resources>
