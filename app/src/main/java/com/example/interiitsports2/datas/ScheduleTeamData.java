@@ -19,12 +19,17 @@ public class ScheduleTeamData {
 	private String match_venue;
 	private String match_type;
 	private Context context;
+	private String status;
+	private String winner, runner;
 	
-	private ScheduleTeamData(String team1_name, String team2_name, String match_venue, String match_type, Context context) {
+	private ScheduleTeamData(String team1_name, String team2_name, String match_venue, String match_type, String winner, String runner, String status, Context context) {
 		this.team1_name = team1_name;
 		this.team2_name = team2_name;
 		this.match_venue = match_venue;
 		this.match_type = match_type;
+		this.winner = winner;
+		this.runner = runner;
+		this.status = status;
 		this.context = context;
 	}
 	
@@ -72,10 +77,23 @@ public class ScheduleTeamData {
 		return null;
 	}
 	
-	public static ScheduleTeamData processJson(Context context){
-		JsonObject jsonObject = JsonParser.parseString("{\"team1\":\"IIT_Bhilai\",\"team2\":\"IIT_BHU\", \"venue\":\"Gymkhana at 4:50PM\", \"type\":\"Final\"}").getAsJsonObject();
-		return new ScheduleTeamData(jsonObject.get("team1").getAsString(), jsonObject.get("team2").getAsString(), jsonObject.get("venue").getAsString(), jsonObject.get("type").getAsString(), context);
-		
+	public String getWinner() {
+		return winner;
+	}
+	
+	public String getRunner() {
+		return runner;
+	}
+	
+	public String getStatus() { return status; }
+	
+	
+	public static ScheduleTeamData processJson(Context context, JsonObject jsonObject){
+		Log.d("NAME SPORT", jsonObject.get("sport_name").toString());
+		String clg1 = jsonObject.get("clg1").getAsString().trim().replace(' ','_');
+		String clg2 = jsonObject.get("clg2").getAsString().trim().replace(' ','_');
+		return new ScheduleTeamData(clg1, clg2, jsonObject.get("venue_time").getAsString(), jsonObject.get("level").getAsString(),
+			jsonObject.get("winner").toString(), jsonObject.get("runner").toString(), jsonObject.get("status").getAsString(), context);
 	}
 	
 }

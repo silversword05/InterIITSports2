@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginTop="?attr/actionBarSize"
-    android:background="#F5F5F5">
-
+    android:background="#f0ebeb">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/sports_list"
@@ -16,7 +15,7 @@
         android:layout_marginEnd="20dp"
         android:paddingStart="15dp"
         android:paddingEnd="15dp"
-        android:paddingTop="80dp"
+        android:paddingTop="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

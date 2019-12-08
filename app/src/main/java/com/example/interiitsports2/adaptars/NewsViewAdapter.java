@@ -68,6 +68,10 @@ public class NewsViewAdapter extends androidx.recyclerview.widget.RecyclerView.A
 				@Override
 				public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
 					newsViewHolder.newsImage.setImageBitmap(resource);
+					float density = context.getResources().getDisplayMetrics().density;
+					ViewGroup.LayoutParams params = newsViewHolder.newsImage.getLayoutParams();
+					params.height = 200;
+					newsViewHolder.newsImage.setLayoutParams(params);
 					newsViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
 						@Override
 						public void onClick(View v) {

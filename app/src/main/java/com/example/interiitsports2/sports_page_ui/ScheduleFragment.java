@@ -40,7 +40,7 @@ public class ScheduleFragment extends Fragment {
 			recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 			recyclerView.setAdapter(new ScheduleIndividualViewAdapter(getContext(), gameName));
 		} else {
-			recyclerView.setPadding(15, 300, 30, 20);
+			recyclerView.setPadding(15, 10, 30, 20);
 			recyclerView.setLayoutManager(new GridLayoutManager(getContext() ,no_of_columns));
 			recyclerView.setAdapter(new DayGridAdapter(getContext()));
 		}

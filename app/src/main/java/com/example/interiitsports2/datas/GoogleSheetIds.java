@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 
 public class GoogleSheetIds {
-	private static String[] gameNames = {"Basketball(M)", "Basketball(W)", "Soccer", "Cricket", "Tennis(M)", "Tennis(W)", "Hockey", "Chess", "Weightlifting", "Athletics"};
+	private static String[] gameNames = {"Basketball(M)", "Basketball(W)", "Football", "Cricket", "Tennis(M)", "Tennis(W)", "Hockey", "Chess", "Weightlifting", "Athletics"};
 	private static String[] ids = {"1J7tic1U9rS9IVaJhzuYXAqyJEd7KXRTNanD4z7C7ItQ",
 		"1HcUH-sP8xor9t2R09U89S3eAHtGRLL2ccbfxLQUthbU", "18DWtmoup92TvRJkYQm6IZiCnh1IA7KsPeIRfTol31zQ",
 		"11Tc_EY0_hiyQjPmwa9RXiihGkg5heJuqPpogwvyqBRQ", "19jp36DB8JBxWV06czg2GevsWyV8CsTePYxvO8s-Wimo",

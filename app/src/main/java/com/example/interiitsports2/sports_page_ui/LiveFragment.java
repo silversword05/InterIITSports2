@@ -21,6 +21,7 @@ import io.paperdb.Paper;
 public class LiveFragment extends Fragment {
 	
 	private String[] individualGames = {"Weightlifting", "Athletics"};
+	private LiveViewAdapter liveViewAdapter;
 	
 	public View onCreateView(@NonNull LayoutInflater inflater,
 							 ViewGroup container, Bundle savedInstanceState) {
@@ -34,9 +35,43 @@ public class LiveFragment extends Fragment {
 		
 		RecyclerView recyclerView = view.findViewById(R.id.live_list);
 		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-		recyclerView.setAdapter(new LiveViewAdapter(getContext(), gameName));
+		liveViewAdapter = new LiveViewAdapter(getContext(), gameName);
+		recyclerView.setAdapter(liveViewAdapter);
 		
 		Log.d("Game NAme", gameName);
 		return view;
+	}
+	
+	@Override
+	public void onDetach() {
+		super.onDetach();
+		try {
+			liveViewAdapter.stopRepeatingTask();
+		} catch (Exception ignored){}
+	}
+	
+	@Override
+	public void onPause() {
+		super.onPause();
+		try {
+			liveViewAdapter.stopRepeatingTask();
+		} catch (Exception ignored){}
+	}
+	
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		try {
+			liveViewAdapter.stopRepeatingTask();
+		} catch (Exception ignored){}
+	}
+	
+	@Override
+	public void onResume() {
+		super.onResume();
+		try {
+			liveViewAdapter.startRepeatingTask();
+		} catch (Exception ignored) {
+		}
 	}
 }

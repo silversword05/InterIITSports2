@@ -2,8 +2,12 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_margin="20dp"
-    android:background="#50000000"
+    android:layout_marginTop="1dp"
+    android:layout_marginStart="5dp"
+    android:layout_marginEnd="5dp"
+    android:paddingTop="10dp"
+    android:paddingBottom="20dp"
+    android:background="@drawable/team_match_card_background"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -14,15 +18,17 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
-        android:fontFamily="@font/oswaldlightitalic"
+        android:fontFamily="@font/montserrat_regular"
         android:textAlignment="center"
-        android:textColor="@android:color/white"
+        android:textColor="@android:color/black"
         android:textSize="18sp"
         android:text="@string/points" />
 
     <ImageView
         android:id="@+id/team1_logo_schedule"
-        android:paddingHorizontal="10dp"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:layout_marginStart="10dp"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_alignParentStart="true"
@@ -32,7 +38,9 @@
 
     <ImageView
         android:id="@+id/team2_logo_schedule"
-        android:paddingHorizontal="10dp"
+        android:paddingEnd="10dp"
+        android:layout_marginEnd="10dp"
+        android:paddingStart="10dp"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_below="@id/match_type_schedule"
@@ -42,38 +50,41 @@
 
     <TextView
         android:id="@+id/team1_name_schedule"
-        android:layout_width="85dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
         android:layout_below="@id/team1_logo_schedule"
         android:layout_alignParentStart="true"
-        android:fontFamily="@font/oswaldlightitalic"
+        android:fontFamily="@font/montserratsemibold"
         android:textAlignment="center"
         android:textSize="18sp"
         android:text="@string/points"
-        android:textColor="@android:color/white"/>
+        android:textColor="@android:color/black"/>
 
     <TextView
         android:id="@+id/team2_name_schedule"
-        android:layout_width="85dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
         android:layout_below="@id/team2_logo_schedule"
         android:layout_alignParentEnd="true"
-        android:fontFamily="@font/oswaldlightitalic"
+        android:fontFamily="@font/montserratsemibold"
         android:textAlignment="center"
         android:textSize="18sp"
         android:text="@string/points"
-        android:textColor="@android:color/white"/>
+        android:textColor="@android:color/black"/>
 
     <TextView
         android:id="@+id/match_venue_schedule"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/oswaldlightitalic"
+        android:fontFamily="@font/montserrat_regular"
         android:textAlignment="center"
         android:textSize="18sp"
+        android:paddingTop="5dp"
         android:text="@string/points"
         android:layout_below="@id/team1_name_schedule"
-        android:textColor="@android:color/white"
+        android:textColor="@android:color/black"
         android:layout_alignParentEnd="true" />
 
     <ImageView

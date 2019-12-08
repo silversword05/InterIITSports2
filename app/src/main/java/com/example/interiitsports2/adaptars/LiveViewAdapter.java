@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.net.Uri;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,12 +25,8 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.interiitsports2.R;
 import com.example.interiitsports2.datas.LiveMatch_data;
-import com.example.interiitsports2.datas.PointsData;
 import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-
-import org.json.JSONArray;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -42,12 +39,34 @@ public class LiveViewAdapter extends androidx.recyclerview.widget.RecyclerView.A
 	private Context context;
 	private String game;
 	
-	public LiveViewAdapter(Context context, String game){
+	private Handler mHandler;
+	private Runnable mStatusChecker = new Runnable() {
+		@Override
+		public void run() {
+			try {
+				fetchData();
+			} finally {
+				mHandler.postDelayed(mStatusChecker, 60000);
+			}
+		}
+	};
+	
+	public LiveViewAdapter(Context context, String game) {
 		this.context = context;
-		fetchData(game);
+		this.game = game;
+		mHandler = new Handler();
+		mStatusChecker.run();
 	}
 	
-	private void fetchData(final String game){
+	public void startRepeatingTask(){
+		mStatusChecker.run();
+	}
+	
+	public void stopRepeatingTask() {
+		mHandler.removeCallbacks(mStatusChecker);
+	}
+	
+	private void fetchData() {
 		Uri uri = new Uri.Builder()
 			.scheme("https")
 			.authority("interiit.com")
@@ -60,7 +79,8 @@ public class LiveViewAdapter extends androidx.recyclerview.widget.RecyclerView.A
 				@Override
 				public void onResponse(String response) {
 					JsonArray jsonArray = (JsonArray) JsonParser.parseString(response);
-					for(int i=0; i<jsonArray.size(); i++) {
+					liveMatchList.clear();
+					for (int i = 0; i < jsonArray.size(); i++) {
 						Log.d("DATA LIVE", jsonArray.get(i).getAsJsonObject().toString());
 						liveMatchList.add(LiveMatch_data.processJson(context, jsonArray.get(i).getAsJsonObject()));
 					}
@@ -69,7 +89,9 @@ public class LiveViewAdapter extends androidx.recyclerview.widget.RecyclerView.A
 			}, new Response.ErrorListener() {
 			@Override
 			public void onErrorResponse(VolleyError error) {
-				Log.d("DATA", Objects.requireNonNull(error.getMessage()));
+				try {
+					Log.d("DATA", Objects.requireNonNull(error.getMessage()));
+				} catch (Exception ignored) {}
 			}
 		});
 		queue.add(stringRequest);
@@ -99,7 +121,7 @@ public class LiveViewAdapter extends androidx.recyclerview.widget.RecyclerView.A
 				LayoutInflater li = LayoutInflater.from(context);
 				final View promptsView = li.inflate(R.layout.prompt_comments, null, false);
 				builder.setView(promptsView);
-				builder.setTitle("Comments");
+				builder.setTitle(" ");
 				final ListView listView = promptsView.findViewById(R.id.comments_list);
 				String comments = liveMatchList.get(position).getCommentary();
 				List<String> comment_list = Arrays.asList(comments.split("\n"));
@@ -120,9 +142,10 @@ public class LiveViewAdapter extends androidx.recyclerview.widget.RecyclerView.A
 		return liveMatchList.size();
 	}
 	
-	class LiveViewHolder extends RecyclerView.ViewHolder{
+	class LiveViewHolder extends RecyclerView.ViewHolder {
 		TextView match_type, team1_score, team2_score, team1_name, team2_name, match_venue;
 		ImageView team1_logo, team2_logo;
+		
 		LiveViewHolder(@NonNull View itemView) {
 			super(itemView);
 			match_type = itemView.findViewById(R.id.match_type);

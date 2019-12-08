@@ -7,7 +7,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.pm.ActivityInfo;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.view.View;
 
 import com.example.interiitsports2.adaptars.EnquiryViewAdapter;
 
@@ -25,6 +27,8 @@ public class EnquiryActivity extends AppCompatActivity {
 		getSupportActionBar().setCustomView(R.layout.custom_action_bar);
 		Toolbar toolbar=(Toolbar)getSupportActionBar().getCustomView().getParent();
 		toolbar.setContentInsetsAbsolute(0,0);
+		getWindow().getDecorView().setSystemUiVisibility( View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+		getWindow().setStatusBarColor(Color.WHITE);
 		
 		setContentView(R.layout.activity_enquiry);
 		

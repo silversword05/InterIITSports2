@@ -9,12 +9,11 @@
     <Button
         android:id="@+id/dayName"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:background="@drawable/rounded_button"
         android:fontFamily="@font/oswaldstencil"
         android:textAlignment="center"
         android:textColor="@android:color/black"
         android:adjustViewBounds="true"
-        android:layout_margin="10dp"
-        android:textSize="20sp" />
+        android:layout_margin="5dp" />
 </LinearLayout>

@@ -2,6 +2,7 @@ package com.example.interiitsports2.adaptars;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,7 @@ public class DayGridAdapter extends androidx.recyclerview.widget.RecyclerView.Ad
 	
 	private ArrayList<Integer> days;
 	private Context context;
+	private int[] daysid = {R.drawable.day0, R.drawable.day1, R.drawable.day2, R.drawable.day3, R.drawable.day4, R.drawable.day5, R.drawable.day6, R.drawable.day7};
 	
 	public DayGridAdapter(Context context){
 		this.context = context;
@@ -37,15 +39,16 @@ public class DayGridAdapter extends androidx.recyclerview.widget.RecyclerView.Ad
 	public DayViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 		View dayEditableView = LayoutInflater.from(parent.getContext()).inflate(R.layout.day_grid, parent, false);
 		GridLayoutManager.LayoutParams params = (GridLayoutManager.LayoutParams) dayEditableView.getLayoutParams();
-		params.height = 150;
+		params.height = 250;
 		dayEditableView.setLayoutParams(params);
 		return new DayGridAdapter.DayViewHolder(dayEditableView);
 	}
 	
 	@Override
 	public void onBindViewHolder(@NonNull DayViewHolder holder, final int position) {
-		holder.dayName.setText(String.valueOf(days.get(position)));
-		holder.dayName.setOnClickListener(new View.OnClickListener() {
+		holder.itemView.setBackground(context.getDrawable(daysid[position]));
+		holder.dayName.setBackgroundColor(Color.TRANSPARENT);
+		holder.itemView.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				//Toast.makeText(context, "Day "+position, Toast.LENGTH_SHORT).show();

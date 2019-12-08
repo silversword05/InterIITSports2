@@ -3,7 +3,7 @@
 <TextView android:id="@+id/comments"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:fontFamily="@font/oswaldlightitalic"
+    android:fontFamily="@font/montserrat_regular"
     android:textAlignment="center"
     android:textSize="18sp"
     android:layout_weight="1"

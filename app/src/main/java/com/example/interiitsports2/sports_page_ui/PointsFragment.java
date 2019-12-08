@@ -32,7 +32,7 @@ public class PointsFragment extends Fragment {
 	
 	private String[] noGroupGames = {"Weightlifting", "Athletics", "Chess"};
 	private String[] men_women_games = {"Basketball", "Tennis"};
-	private String[] teamGames = {"Basketball", "Soccer", "Cricket", "Tennis", "Hockey"};
+	private String[] teamGames = {"Basketball", "Football", "Cricket", "Tennis", "Hockey"};
 	private RecyclerView recyclerView;
 	private static final int no_of_columns = 2;
 	

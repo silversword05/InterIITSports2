@@ -5,14 +5,15 @@
     android:orientation="vertical"
     android:layout_margin="5dp"
     android:layout_width="match_parent"
+    android:paddingBottom="25dp"
     android:layout_height="wrap_content"
-    android:background="@drawable/rounded_button">
+    android:background="@drawable/team_match_card_background">
 
 
     <ImageView
         android:id="@+id/news_image"
         android:layout_width="wrap_content"
-        android:layout_height="80dp"
+        android:layout_height="300dp"
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
@@ -20,20 +21,18 @@
         android:layout_below="@id/news_image"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/oswaldbolditalic"
+        android:fontFamily="@font/montserratsemibold"
         android:textAlignment="center"
         android:textColor="@android:color/black"
-        android:textSize="25sp"
-        android:text="TextView" />
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/news_body"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/news_heading"
-        android:fontFamily="@font/oswaldlightitalic"
+        android:fontFamily="@font/montserrat_regular"
         android:textAlignment="center"
         android:textColor="@android:color/black"
-        android:textSize="20sp"
-        android:text="TextView"/>
+        android:textSize="15sp" />
 </RelativeLayout>

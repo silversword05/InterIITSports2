@@ -17,8 +17,9 @@ import com.example.interiitsports2.SpecificSportsActivity;
 
 public class SportsViewAdapter extends androidx.recyclerview.widget.RecyclerView.Adapter<SportsViewAdapter.SportsViewHolder> {
 	
-	private String[] sports_list = {"Basketball", "Soccer", "Cricket", "Tennis", "Hockey", "Chess", "Weightlifting", "Athletics"};
-	private int[] icons = {R.drawable.ic_basketball_icon, R.drawable.ic_soccer_icon, R.drawable.ic_cricket_icon, R.drawable.ic_tennis_icon, R.drawable.ic_hockey_icon, R.drawable.ic_chess_icon, R.drawable.ic_weightlifting_icon, R.drawable.ic_athletics_icon};
+	private String[] sports_list = {"Basketball", "Football", "Cricket", "Tennis", "Hockey", "Chess", "Weightlifting", "Athletics"};
+	private int[] icons = {R.drawable.basketball, R.drawable.football, R.drawable.cricket, R.drawable.tennis, R.drawable.hockey, R.drawable.chess,
+		R.drawable.weightliifing, R.drawable.athletics};
 	private Context context;
 	
 	public SportsViewAdapter(Context context){
@@ -30,7 +31,7 @@ public class SportsViewAdapter extends androidx.recyclerview.widget.RecyclerView
 	public SportsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 		View listEditableView = LayoutInflater.from(parent.getContext()).inflate(R.layout.sports_grid, parent, false);
 		GridLayoutManager.LayoutParams params = (GridLayoutManager.LayoutParams) listEditableView.getLayoutParams();
-		params.height = GridLayoutManager.LayoutParams.WRAP_CONTENT;
+		params.height = 250;
 		listEditableView.setLayoutParams(params);
 		return new SportsViewAdapter.SportsViewHolder(listEditableView);
 	}
@@ -39,7 +40,6 @@ public class SportsViewAdapter extends androidx.recyclerview.widget.RecyclerView
 	public void onBindViewHolder(@NonNull SportsViewHolder holder, int position) {
 		final String sport = sports_list[position];
 		holder.gridImage.setImageResource(icons[position]);
-		holder.gridText.setText(sport);
 		holder.itemView.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -57,11 +57,9 @@ public class SportsViewAdapter extends androidx.recyclerview.widget.RecyclerView
 	
 	class SportsViewHolder extends RecyclerView.ViewHolder{
 		ImageView gridImage;
-		TextView gridText;
 		SportsViewHolder(@NonNull View itemView) {
 			super(itemView);
 			gridImage = itemView.findViewById(R.id.gridImage);
-			gridText = itemView.findViewById(R.id.gridText);
 		}
 	}
 }

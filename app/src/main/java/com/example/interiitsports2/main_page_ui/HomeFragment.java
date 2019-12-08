@@ -71,22 +71,27 @@ public class HomeFragment extends Fragment {
 		((Button)view.findViewById(R.id.web)).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://interiit.com")));
-				
+				try {
+					startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://interiit.com")));
+				} catch (Exception ignored){}
 			}
 		});
-//		((Button)view.findViewById(R.id.gmail)).setOnClickListener(new View.OnClickListener() {
-//			@Override
-//			public void onClick(View v) {
-//				Intent intent=new Intent(Intent.ACTION_SEND);
-//				String[] recipients={"interiit2019@gmail.com"};
-//				intent.putExtra(Intent.EXTRA_EMAIL, recipients);
-//				intent.putExtra(Intent.EXTRA_SUBJECT,"Mail from the app:");
-//				intent.setType("text/html");
-//				intent.setPackage("com.google.android.gm");
-//				startActivity(Intent.createChooser(intent, "Send mail"));
-//			}
-//		});
+		((Button)view.findViewById(R.id.youtube)).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				try {
+					startActivity(new Intent(Intent.ACTION_VIEW,   Uri.parse("http://www.youtube.com/channel/UCmlqubFEoVdj8Izqs5KO63g")));
+				} catch (Exception ignored) {}
+			}
+		});
+		((Button)view.findViewById(R.id.instagram)).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				try {
+					startActivity(new Intent(Intent.ACTION_VIEW,   Uri.parse("https://www.instagram.com/inter_iit/")));
+				} catch (Exception ignored) {}
+			}
+		});
 		((Button)view.findViewById(R.id.moments)).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -98,6 +103,22 @@ public class HomeFragment extends Fragment {
 			public void onClick(View v) {
 				setEnquiryView();
 				
+			}
+		});
+		((Button)view.findViewById(R.id.team)).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				try {
+					startActivity(new Intent(Intent.ACTION_VIEW,   Uri.parse("https://interiit.com/team")));
+				} catch (Exception ignored) {}
+			}
+		});
+		((Button)view.findViewById(R.id.sponsors)).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				try {
+					startActivity(new Intent(Intent.ACTION_VIEW,   Uri.parse("https://interiit.com/sponsors")));
+				} catch (Exception ignored) {}
 			}
 		});
 		return view;

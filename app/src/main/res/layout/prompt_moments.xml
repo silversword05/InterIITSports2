@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:hint="@string/name"
         android:fontFamily="@font/oswaldlightitalic"
-        android:textAlignment="center"
+        android:textAlignment="textStart"
         android:textSize="22sp"
         android:importantForAutofill="no"
         android:inputType="textPersonName">
@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:hint="@string/email_id"
         android:fontFamily="@font/oswaldlightitalic"
-        android:textAlignment="center"
+        android:textAlignment="textStart"
         android:textSize="22sp"
         android:importantForAutofill="no"
         android:inputType="textEmailAddress">
@@ -35,7 +35,7 @@
         android:layout_height="wrap_content"
         android:hint="@string/moment_name"
         android:fontFamily="@font/oswaldlightitalic"
-        android:textAlignment="center"
+        android:textAlignment="textStart"
         android:textSize="22sp"
         android:importantForAutofill="no"
         android:inputType="text">
