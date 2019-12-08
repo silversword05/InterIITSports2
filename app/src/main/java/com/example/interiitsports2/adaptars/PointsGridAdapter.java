@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.LinearLayout.LayoutParams;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -43,9 +45,20 @@ public class PointsGridAdapter extends androidx.recyclerview.widget.RecyclerView
 		return new PointsGridAdapter.PointsViewHolder(dayEditableView);
 	}
 	
+	private void setMargins (View view, int left, int top, int right, int bottom) {
+		if (view.getLayoutParams() instanceof ViewGroup.MarginLayoutParams) {
+			ViewGroup.MarginLayoutParams p = (ViewGroup.MarginLayoutParams) view.getLayoutParams();
+			p.setMargins(left, top, right, bottom);
+			view.requestLayout();
+		}
+	}
+	
 	@Override
 	public void onBindViewHolder(@NonNull PointsViewHolder holder, final int position) {
 		holder.dayName.setText(String.valueOf(arrayList.get(position)));
+		if(position%2==0)
+			setMargins(holder.itemView, 20, 10, 10, 10);
+		else setMargins(holder.itemView, 10, 10, 20, 10);
 		holder.dayName.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
