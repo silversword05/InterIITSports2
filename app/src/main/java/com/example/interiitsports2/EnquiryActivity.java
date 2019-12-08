@@ -76,9 +76,9 @@ public class EnquiryActivity extends AppCompatActivity {
 				}
 				IntentIntegrator intentIntegrator = new IntentIntegrator(EnquiryActivity.this);
 				intentIntegrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE_TYPES);
-				intentIntegrator.setBeepEnabled(false);
+				intentIntegrator.setBeepEnabled(true);
 				intentIntegrator.setCameraId(0);
-				intentIntegrator.setPrompt("SCAN QR");
+				intentIntegrator.setPrompt(" ");
 				intentIntegrator.setBarcodeImageEnabled(false);
 				intentIntegrator.initiateScan();
 			}

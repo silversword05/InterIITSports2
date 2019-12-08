@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">InterIITSports2019</string>
+    <string name="app_name">Inter IIT Sports Meet 2019</string>
     <string name="title_sports">Sports</string>
     <string name="title_newsletter">Newsletter</string>
     <string name="title_notifications">Notifications</string>
@@ -21,7 +21,7 @@
     <string name="sponsors">Sponsors</string>
     <string name="team">Team</string>
     <string name="email_id">Email id</string>
-    <string name="name">Name</string>
+    <string name="name">Moment Name</string>
     <string name="moment_name">Moment Description</string>
     <string name="complaint_description">Complaint Description</string>
     <string name="scan_qr_and_submit">Scan QR and submit</string>

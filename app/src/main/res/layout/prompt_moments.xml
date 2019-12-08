@@ -6,34 +6,38 @@
     android:padding="25dp">
 
     <EditText
-        android:id="@+id/getCandiName"
+        android:id="@+id/getMomentName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/name"
-        android:fontFamily="@font/oswaldlightitalic"
+        android:fontFamily="@font/roboto_regular"
         android:textAlignment="textStart"
-        android:textSize="22sp"
+        android:singleLine="false"
+        android:textSize="15sp"
         android:importantForAutofill="no"
         android:inputType="textPersonName">
     </EditText>
 
-    <EditText
-        android:id="@+id/getCandimoment"
+    <ScrollView
+        android:id="@+id/description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/moment_name"
-        android:fontFamily="@font/oswaldlightitalic"
-        android:textAlignment="textStart"
-        android:textSize="22sp"
-        android:importantForAutofill="no"
-        android:inputType="text">
-    </EditText>
+        android:scrollbars="vertical"
+        android:fillViewport="true">
+        <EditText
+            android:id="@+id/getCandimoment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/moment_name"
+            android:fontFamily="@font/roboto_regular"
+            android:gravity="top|start"
+            android:inputType="textMultiLine"
+            android:textAlignment="textStart"
+            android:textSize="15sp"
+            android:importantForAutofill="no">
+        </EditText>
+    </ScrollView>
 
-    <androidx.appcompat.widget.AppCompatSpinner
-        android:id="@+id/getCandiIIT"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_marginTop="5dp">
-    </androidx.appcompat.widget.AppCompatSpinner>
 
 </LinearLayout>

@@ -1,11 +1,13 @@
 package com.example.interiitsports2.main_page_ui;
 
-import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -13,24 +15,23 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
+import androidx.core.app.NotificationCompat;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.interiitsports2.EnquiryActivity;
 import com.example.interiitsports2.R;
-import com.example.interiitsports2.adaptars.EnquiryViewAdapter;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
@@ -41,13 +42,14 @@ import com.google.firebase.storage.OnPausedListener;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -100,9 +102,9 @@ public class HomeFragment extends Fragment {
 			public void onClick(View v) {
 				IntentIntegrator intentIntegrator = IntentIntegrator.forSupportFragment(HomeFragment.this);
 				intentIntegrator.setDesiredBarcodeFormats(IntentIntegrator.ALL_CODE_TYPES);
-				intentIntegrator.setBeepEnabled(false);
+				intentIntegrator.setBeepEnabled(true);
 				intentIntegrator.setCameraId(0);
-				intentIntegrator.setPrompt("SCAN QR");
+				intentIntegrator.setPrompt(" ");
 				intentIntegrator.setBarcodeImageEnabled(false);
 				intentIntegrator.initiateScan();
 				//catchMoments();
@@ -150,25 +152,13 @@ public class HomeFragment extends Fragment {
 		final View promptsView = li.inflate(R.layout.prompt_moments, null, false);
 		builder.setView(promptsView);
 		builder.setTitle("Moments");
-		final EditText name = promptsView.findViewById(R.id.getCandiName);
+		final EditText name = promptsView.findViewById(R.id.getMomentName);
 		final EditText moment = promptsView.findViewById(R.id.getCandimoment);
-		final Spinner spinner = promptsView.findViewById(R.id.getCandiIIT);
-		ArrayList<String> arrayList = new ArrayList<>();
-		try {
-			for(String f : Objects.requireNonNull(Objects.requireNonNull(getContext()).getAssets().list("")))
-				if(f.startsWith("IIT")) arrayList.add(f.substring(0, f.lastIndexOf(".")).replace("_"," "));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		ArrayAdapter arrayAdapter = new ArrayAdapter<>(getContext(),android.R.layout.simple_spinner_item, arrayList);
-		arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		spinner.setAdapter(arrayAdapter);
-		builder.setPositiveButton("Add your Moment", new DialogInterface.OnClickListener() {
+		builder.setPositiveButton("Add Moment Image", new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				Paper.book().write("name", String.valueOf(name.getText()));
+				Paper.book().write("momentName", String.valueOf(name.getText()));
 				Paper.book().write("moment", String.valueOf(moment.getText()));
-				Paper.book().write("iit", String.valueOf(spinner.getSelectedItem()));
 				Log.d("DETAILS", String.valueOf(name.getText()));
 				dialog.cancel();
 				CropImage.activity().setGuidelines(CropImageView.Guidelines.ON).start(Objects.requireNonNull(getContext()), HomeFragment.this);
@@ -186,7 +176,7 @@ public class HomeFragment extends Fragment {
 			Log.d("IMAGE URI", imageUri.toString());
 			final StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
 			final String filename = RingtoneManager.getRingtone(getContext(), imageUri).getTitle(getContext());
-			Toast.makeText(getContext(), "Please wait until we process your request", Toast.LENGTH_SHORT).show();
+			Toast.makeText(getContext(), "Uploading in progress in background", Toast.LENGTH_SHORT).show();
 			mStorageRef.child(Paper.book().read("email")+"/"+filename).putFile(imageUri)
 				.addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
 					@Override
@@ -229,6 +219,33 @@ public class HomeFragment extends Fragment {
 					String email = Result.getContents().substring(0, Result.getContents().indexOf('^'));
 					Paper.init(Objects.requireNonNull(getContext()));
 					Paper.book().write("email", email);
+					Uri uri = new Uri.Builder()
+						.scheme("https")
+						.authority("interiit.com")
+						.appendPath("profile_req_with_qr")
+						.appendPath(Result.getContents())
+						.build();
+					RequestQueue queue = Volley.newRequestQueue(getContext());
+					StringRequest stringRequest = new StringRequest(Request.Method.GET, uri.toString(),
+						new Response.Listener<String>() {
+							@Override
+							public void onResponse(String response) {
+								Log.d("RESPONSE", response);
+								JsonObject jsonObject = ((JsonArray) JsonParser.parseString(response)).get(0).getAsJsonObject();
+								Paper.book().write("name", jsonObject.get("name").getAsString());
+								Paper.book().write("iit", jsonObject.get("iit").getAsString());
+								Paper.book().write("sports", jsonObject.get("selected_sports").getAsString());
+								Paper.book().write("phone", jsonObject.get("phone").getAsString());
+							}
+						}, new Response.ErrorListener() {
+						@Override
+						public void onErrorResponse(VolleyError error) {
+							try {
+								Log.d("DATA", Objects.requireNonNull(error.getMessage()));
+							} catch (Exception ignored) {}
+						}
+					});
+					queue.add(stringRequest);
 					catchMoments();
 				}
 			}
@@ -242,6 +259,9 @@ public class HomeFragment extends Fragment {
 		moment.put("email", Paper.book().read("email"));
 		moment.put("iit", Paper.book().read("iit"));
 		moment.put("moment", Paper.book().read("moment"));
+		moment.put("momentName", Paper.book().read("momentName"));
+		moment.put("sports", Paper.book().read("sports"));
+		moment.put("phone", Paper.book().read("phone"));
 		moment.put("Link", uri.toString());
 		db.collection("Moments").document()
 			.set(moment)
@@ -249,12 +269,30 @@ public class HomeFragment extends Fragment {
 				@Override
 				public void onSuccess(Void aVoid) {
 					Log.d("Upload", "DocumentSnapshot successfully written!");
-					Toast.makeText(getContext(), "Your moment is successfully added", Toast.LENGTH_SHORT).show();
+					
+						notifyThis();
+					
 				}
 			});
 	}
 	
 	private void setEnquiryView(){
 		Objects.requireNonNull(getContext()).startActivity(new Intent(getActivity(), EnquiryActivity.class));
+	}
+	
+	private void notifyThis() {
+		NotificationChannel mChannel = new NotificationChannel("MY_ID", "InterIITSports2019", NotificationManager.IMPORTANCE_HIGH);
+		
+		Notification notification =
+			new NotificationCompat.Builder(Objects.requireNonNull(getContext()), "MY_ID")
+				.setSmallIcon(R.mipmap.ic_launcher_foreground)
+				.setContentTitle("Moments")
+				.setContentText("Your moment is successfully uploaded")
+				.setChannelId("MY_ID").build();
+		
+		NotificationManager mNotificationManager =
+			(NotificationManager) getContext().getSystemService(Context.NOTIFICATION_SERVICE);
+		Objects.requireNonNull(mNotificationManager).createNotificationChannel(mChannel);
+		mNotificationManager.notify(0 , notification);
 	}
 }
