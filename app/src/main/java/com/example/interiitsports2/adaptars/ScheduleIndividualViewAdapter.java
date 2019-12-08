@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,11 +40,13 @@ public class ScheduleIndividualViewAdapter extends androidx.recyclerview.widget.
 	private String game;
 	private Context context;
 	private RecyclerView recyclerView;
+	private ProgressBar progressBar;
 	
-	public ScheduleIndividualViewAdapter(Context context, String game, RecyclerView recyclerView){
+	public ScheduleIndividualViewAdapter(Context context, String game, RecyclerView recyclerView, ProgressBar progressBar){
 		this.context = context;
 		this.recyclerView = recyclerView;
 		this.game = game;
+		this.progressBar = progressBar;
 		fetchData();
 	}
 	
@@ -65,6 +68,7 @@ public class ScheduleIndividualViewAdapter extends androidx.recyclerview.widget.
 						scheduleIndividualDataArrayList.add(ScheduleIndividualData.processJson(context, jsonArray.get(i).getAsJsonObject()));
 					}
 					notifyDataSetChanged();
+					progressBar.setVisibility(View.GONE);
 					if(scheduleIndividualDataArrayList.isEmpty()) Toast.makeText(context, "No matches till now", Toast.LENGTH_SHORT).show();
 					recyclerView.scheduleLayoutAnimation();
 				}

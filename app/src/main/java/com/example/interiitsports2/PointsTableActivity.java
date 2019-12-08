@@ -11,6 +11,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.interiitsports2.adaptars.PointsDataAdapter;
@@ -41,8 +42,11 @@ public class PointsTableActivity extends AppCompatActivity {
 		
 		Log.d("DATA POINTS", sheet+" "+id+" "+type);
 		
+		ProgressBar progressBar = findViewById(R.id.progressBar);
+		progressBar.setVisibility(View.VISIBLE);
+		
 		RecyclerView recyclerView = findViewById(R.id.points_data_list);
 		recyclerView.setLayoutManager(new LinearLayoutManager(this));
-		recyclerView.setAdapter(new PointsDataAdapter(sheet, id, this, type));
+		recyclerView.setAdapter(new PointsDataAdapter(sheet, id, this, type, progressBar));
 	}
 }

@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
+import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -35,11 +36,14 @@ public class LiveFragment extends Fragment {
 		
 		if(Arrays.asList(individualGames).contains(gameName)) return view;
 		
+		ProgressBar progressBar = view.findViewById(R.id.progressBar);
+		progressBar.setVisibility(View.VISIBLE);
+		
 		RecyclerView recyclerView = view.findViewById(R.id.live_list);
 		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 		LayoutAnimationController animation = AnimationUtils.loadLayoutAnimation(getContext(), R.anim.layout_animation_fall_down);
 		recyclerView.setLayoutAnimation(animation);
-		liveViewAdapter = new LiveViewAdapter(getContext(), gameName, recyclerView);
+		liveViewAdapter = new LiveViewAdapter(getContext(), gameName, recyclerView, progressBar);
 		recyclerView.setAdapter(liveViewAdapter);
 		
 		Log.d("Game NAme", gameName);

@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -33,11 +34,13 @@ public class PointsDataAdapter extends androidx.recyclerview.widget.RecyclerView
 	
 	private List<PointsData> pointsData = new ArrayList<>();
 	private Context context;
-	int gameType; // 0 for no group games
+	private int gameType; // 0 for no group games
+	private ProgressBar progressBar;
 	
-	public PointsDataAdapter(String sheet, String id, Context context, int gameType){
+	public PointsDataAdapter(String sheet, String id, Context context, int gameType, ProgressBar progressBar){
 		this.context = context;
 		this.gameType = gameType;
+		this.progressBar = progressBar;
 		fetchData(sheet, id);
 	}
 	
@@ -63,6 +66,7 @@ public class PointsDataAdapter extends androidx.recyclerview.widget.RecyclerView
 					for(int i=0; i<jsonArray.size(); i++)
 						pointsData.add(new PointsData(jsonArray.get(i).getAsJsonArray(), gameType));
 					notifyDataSetChanged();
+					progressBar.setVisibility(View.GONE);
 				}
 			}, new Response.ErrorListener() {
 			@Override

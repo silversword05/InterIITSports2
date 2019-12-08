@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,12 +41,14 @@ public class ScheduleTeamViewAdapter extends androidx.recyclerview.widget.Recycl
 	private Context context;
 	private int day;
 	private RecyclerView recyclerView;
+	private ProgressBar progressBar;
 	
-	public ScheduleTeamViewAdapter(Context context, String game, int day, RecyclerView recyclerView){
+	public ScheduleTeamViewAdapter(Context context, String game, int day, RecyclerView recyclerView, ProgressBar progressBar){
 		this.context = context;
 		this.day = day;
 		this.game = game;
 		this.recyclerView = recyclerView;
+		this.progressBar = progressBar;
 		fetchData();
 	}
 	
@@ -68,6 +71,7 @@ public class ScheduleTeamViewAdapter extends androidx.recyclerview.widget.Recycl
 						scheduleTeamDataArrayList.add(ScheduleTeamData.processJson(context, jsonArray.get(i).getAsJsonObject()));
 					}
 					notifyDataSetChanged();
+					progressBar.setVisibility(View.GONE);
 					if(scheduleTeamDataArrayList.isEmpty()) Toast.makeText(context, "No matches till now", Toast.LENGTH_SHORT).show();
 					recyclerView.scheduleLayoutAnimation();
 				}

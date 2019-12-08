@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,6 +41,7 @@ public class LiveViewAdapter extends androidx.recyclerview.widget.RecyclerView.A
 	private Context context;
 	private String game;
 	private RecyclerView recyclerView;
+	private ProgressBar progressBar;
 	
 	private Handler mHandler;
 	private Runnable mStatusChecker = new Runnable() {
@@ -53,9 +55,10 @@ public class LiveViewAdapter extends androidx.recyclerview.widget.RecyclerView.A
 		}
 	};
 	
-	public LiveViewAdapter(Context context, String game, RecyclerView recyclerView) {
+	public LiveViewAdapter(Context context, String game, RecyclerView recyclerView, ProgressBar progressBar) {
 		this.context = context;
 		this.game = game;
+		this.progressBar = progressBar;
 		mHandler = new Handler();
 		this.recyclerView = recyclerView;
 		mStatusChecker.run();
@@ -89,6 +92,7 @@ public class LiveViewAdapter extends androidx.recyclerview.widget.RecyclerView.A
 					}
 					if(liveMatchList.isEmpty()) Toast.makeText(context, "No matches are live now", Toast.LENGTH_SHORT).show();
 					notifyDataSetChanged();
+					progressBar.setVisibility(View.GONE);
 					recyclerView.scheduleLayoutAnimation();
 				}
 			}, new Response.ErrorListener() {
@@ -122,6 +126,7 @@ public class LiveViewAdapter extends androidx.recyclerview.widget.RecyclerView.A
 		holder.itemView.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				recyclerView.scrollToPosition(position);
 				final AlertDialog.Builder builder = new AlertDialog.Builder(context);
 				LayoutInflater li = LayoutInflater.from(context);
 				final View promptsView = li.inflate(R.layout.prompt_comments, null, false);

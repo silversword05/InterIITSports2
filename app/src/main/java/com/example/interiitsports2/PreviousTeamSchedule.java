@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.interiitsports2.adaptars.ScheduleTeamViewAdapter;
@@ -41,10 +42,13 @@ public class PreviousTeamSchedule extends AppCompatActivity {
 		
 		setContentView(R.layout.activity_previous_team_schedule);
 		
+		ProgressBar progressBar = findViewById(R.id.progressBar);
+		progressBar.setVisibility(View.VISIBLE);
+		
 		RecyclerView recyclerView = findViewById(R.id.schedule_list_team);
 		recyclerView.setLayoutManager(new LinearLayoutManager(this));
 		LayoutAnimationController animation = AnimationUtils.loadLayoutAnimation(this, R.anim.layout_animation_fall_down);
 		recyclerView.setLayoutAnimation(animation);
-		recyclerView.setAdapter(new ScheduleTeamViewAdapter(this, gameName, day, recyclerView));
+		recyclerView.setAdapter(new ScheduleTeamViewAdapter(this, gameName, day, recyclerView, progressBar));
 	}
 }
