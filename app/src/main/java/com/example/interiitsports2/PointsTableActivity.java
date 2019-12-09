@@ -3,6 +3,7 @@ package com.example.interiitsports2;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -47,6 +48,7 @@ public class PointsTableActivity extends AppCompatActivity {
 		
 		RecyclerView recyclerView = findViewById(R.id.points_data_list);
 		recyclerView.setLayoutManager(new LinearLayoutManager(this));
+		recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL));
 		recyclerView.setAdapter(new PointsDataAdapter(sheet, id, this, type, progressBar));
 	}
 }
