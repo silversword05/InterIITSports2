@@ -40,7 +40,7 @@ import io.paperdb.Paper;
 public class EnquiryActivity extends AppCompatActivity {
 	
 	private String complaintText;
-	private String[] complaintTypes = {"Select Category", "Accomodation", "Sports Event", "Transportation", "Mess", "Miscellaneous"};
+	private String[] complaintTypes = {"Select Category ▼", "Accomodation", "Sports Event", "Transportation", "Mess", "Miscellaneous"};
 	private String typeComplaint;
 	
 	@Override

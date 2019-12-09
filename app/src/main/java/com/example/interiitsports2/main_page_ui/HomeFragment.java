@@ -176,7 +176,7 @@ public class HomeFragment extends Fragment {
 			Log.d("IMAGE URI", imageUri.toString());
 			final StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
 			final String filename = RingtoneManager.getRingtone(getContext(), imageUri).getTitle(getContext());
-			Toast.makeText(getContext(), "Uploading in progress in background", Toast.LENGTH_SHORT).show();
+			Toast.makeText(getContext(), "Upload in progress in background!", Toast.LENGTH_SHORT).show();
 			mStorageRef.child(Paper.book().read("email")+"/"+filename).putFile(imageUri)
 				.addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
 					@Override
@@ -287,7 +287,7 @@ public class HomeFragment extends Fragment {
 			new NotificationCompat.Builder(Objects.requireNonNull(getContext()), "MY_ID")
 				.setSmallIcon(R.mipmap.ic_launcher_foreground)
 				.setContentTitle("Moments")
-				.setContentText("Your moment is successfully uploaded")
+				.setContentText("Your moment is successfully uploaded.")
 				.setChannelId("MY_ID").build();
 		
 		NotificationManager mNotificationManager =

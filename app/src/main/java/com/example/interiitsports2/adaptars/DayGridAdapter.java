@@ -24,7 +24,8 @@ public class DayGridAdapter extends androidx.recyclerview.widget.RecyclerView.Ad
 	
 	private ArrayList<Integer> days;
 	private Context context;
-	private int[] daysid = {R.drawable.day0, R.drawable.day1, R.drawable.day2, R.drawable.day3, R.drawable.day4, R.drawable.day5, R.drawable.day6, R.drawable.day7, R.drawable.day8};
+	private int[] daysid = {R.drawable.day1, R.drawable.day2, R.drawable.day3, R.drawable.day4, R.drawable.day5, R.drawable.day6,
+		R.drawable.day7, R.drawable.day8, R.drawable.day9};
 	
 	public DayGridAdapter(Context context){
 		this.context = context;
@@ -39,7 +40,7 @@ public class DayGridAdapter extends androidx.recyclerview.widget.RecyclerView.Ad
 	public DayViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 		View dayEditableView = LayoutInflater.from(parent.getContext()).inflate(R.layout.day_grid, parent, false);
 		GridLayoutManager.LayoutParams params = (GridLayoutManager.LayoutParams) dayEditableView.getLayoutParams();
-		params.height = 200;
+		params.height = 250;
 		dayEditableView.setLayoutParams(params);
 		return new DayGridAdapter.DayViewHolder(dayEditableView);
 	}
