@@ -16,7 +16,7 @@
 
     <TextView
         android:id="@+id/played_points"
-        android:layout_width="60dp"
+        android:layout_width="65dp"
         android:layout_height="match_parent"
         android:gravity="center"
         android:fontFamily="@font/oswaldlight"
@@ -24,7 +24,7 @@
 
     <TextView
         android:id="@+id/won_points"
-        android:layout_width="40dp"
+        android:layout_width="45dp"
         android:layout_height="match_parent"
         android:gravity="center"
         android:fontFamily="@font/oswaldlight"
@@ -32,7 +32,7 @@
 
     <TextView
         android:id="@+id/lost_points"
-        android:layout_width="40dp"
+        android:layout_width="45dp"
         android:layout_height="match_parent"
         android:gravity="center"
         android:fontFamily="@font/oswaldlight"
@@ -40,7 +40,7 @@
 
     <TextView
         android:id="@+id/for_points"
-        android:layout_width="40dp"
+        android:layout_width="45dp"
         android:layout_height="match_parent"
         android:gravity="center"
         android:fontFamily="@font/oswaldlight"
@@ -56,7 +56,7 @@
 
     <TextView
         android:id="@+id/points_points"
-        android:layout_width="60dp"
+        android:layout_width="65dp"
         android:layout_height="match_parent"
         android:gravity="center"
         android:fontFamily="@font/oswaldlight"
