@@ -7,19 +7,19 @@
 
     <fragment
         android:id="@+id/navigation_live"
-        android:name="com.example.interiitsports2.sports_page_ui.LiveFragment"
+        android:name="com.iitkharagpur.interiitsports2.sports_page_ui.LiveFragment"
         android:label="@string/live"
         tools:layout="@layout/fragment_live" />
 
     <fragment
         android:id="@+id/navigation_schedule"
-        android:name="com.example.interiitsports2.sports_page_ui.ScheduleFragment"
+        android:name="com.iitkharagpur.interiitsports2.sports_page_ui.ScheduleFragment"
         android:label="@string/schedule"
         tools:layout="@layout/fragment_schedule" />
 
     <fragment
         android:id="@+id/navigation_points"
-        android:name="com.example.interiitsports2.sports_page_ui.PointsFragment"
+        android:name="com.iitkharagpur.interiitsports2.sports_page_ui.PointsFragment"
         android:label="@string/points"
         tools:layout="@layout/fragment_points" />
 

@@ -42,6 +42,43 @@
           ]
         }
       }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:907186071906:android:31212cfc85f7bfd232e43b",
+        "android_client_info": {
+          "package_name": "com.iitkharagpur.interiitsports2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "907186071906-jbvlqv5lcjpmj7d2o7s5ao7ru9nak9nk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.iitkharagpur.interiitsports2",
+            "certificate_hash": "27e249002cafca49458e15512f056a7f18aa998f"
+          }
+        },
+        {
+          "client_id": "907186071906-asnd9999tpv84itq60ctrd8cjn66200q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDAJAub1Uh4LGFMRBSpzxh2YZqtdSD5OHI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "907186071906-asnd9999tpv84itq60ctrd8cjn66200q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
     }
   ],
   "configuration_version": "1"
