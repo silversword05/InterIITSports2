@@ -1,10 +1,14 @@
 package com.iitkharagpur.interiitsports2;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.hardware.Camera;
+import android.hardware.camera2.CameraCharacteristics;
+import android.hardware.camera2.CameraManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -32,6 +36,7 @@ import com.google.firebase.appindexing.builders.Actions;
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
+	public static int cameraId = 0;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +54,8 @@ public class MainActivity extends AppCompatActivity {
 		setContentView(R.layout.activity_main);
 		BottomNavigationView navView = findViewById(R.id.nav_view);
 		fetchpermission();
+		
+		getCameraId();
 		// Passing each menu ID as a set of Ids because each
 		// menu should be considered as top level destinations.
 		AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
@@ -84,6 +91,17 @@ public class MainActivity extends AppCompatActivity {
 			if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 				Log.d("PERMISSION", "granted");
 			} else finish();
+		}
+	}
+	
+	private void getCameraId(){
+		Camera.CameraInfo cameraInfo = new Camera.CameraInfo();
+		for (int camIdx = 0; camIdx < Camera.getNumberOfCameras(); camIdx++) {
+			Camera.getCameraInfo(camIdx, cameraInfo);
+			if (cameraInfo.facing == Camera.CameraInfo.CAMERA_FACING_BACK) {
+				cameraId = camIdx;
+				break;
+			}
 		}
 	}
 	

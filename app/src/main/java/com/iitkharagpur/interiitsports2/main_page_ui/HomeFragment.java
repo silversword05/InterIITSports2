@@ -10,6 +10,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.RingtoneManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,6 +22,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 import androidx.fragment.app.Fragment;
 
@@ -31,6 +33,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.iitkharagpur.interiitsports2.EnquiryActivity;
+import com.iitkharagpur.interiitsports2.MainActivity;
 import com.iitkharagpur.interiitsports2.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -103,7 +106,7 @@ public class HomeFragment extends Fragment {
 				IntentIntegrator intentIntegrator = IntentIntegrator.forSupportFragment(HomeFragment.this);
 				intentIntegrator.setDesiredBarcodeFormats(IntentIntegrator.ALL_CODE_TYPES);
 				intentIntegrator.setBeepEnabled(true);
-				intentIntegrator.setCameraId(0);
+				intentIntegrator.setCameraId(MainActivity.cameraId);
 				intentIntegrator.setPrompt(" ");
 				intentIntegrator.setBarcodeImageEnabled(false);
 				intentIntegrator.initiateScan();
@@ -269,8 +272,9 @@ public class HomeFragment extends Fragment {
 				@Override
 				public void onSuccess(Void aVoid) {
 					Log.d("Upload", "DocumentSnapshot successfully written!");
-					
+					if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 						notifyThis();
+					}
 					
 				}
 			});
@@ -280,6 +284,7 @@ public class HomeFragment extends Fragment {
 		Objects.requireNonNull(getContext()).startActivity(new Intent(getActivity(), EnquiryActivity.class));
 	}
 	
+	@RequiresApi(api = Build.VERSION_CODES.O)
 	private void notifyThis() {
 		NotificationChannel mChannel = new NotificationChannel("MY_ID", "InterIITSports2019", NotificationManager.IMPORTANCE_HIGH);
 		
