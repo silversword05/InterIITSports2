@@ -1,14 +1,11 @@
 package com.iitkharagpur.interiitsports2;
 
 import android.Manifest;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.hardware.Camera;
-import android.hardware.camera2.CameraCharacteristics;
-import android.hardware.camera2.CameraManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -25,7 +22,6 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-import com.iitkharagpur.interiitsports2.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.appindexing.Action;
 import com.google.firebase.appindexing.FirebaseAppIndex;
@@ -48,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
 		getSupportActionBar().setCustomView(R.layout.custom_action_bar);
 		Toolbar toolbar = (Toolbar) getSupportActionBar().getCustomView().getParent();
 		toolbar.setContentInsetsAbsolute(0, 0);
-		getWindow().getDecorView().setSystemUiVisibility( View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+		getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
 		getWindow().setStatusBarColor(Color.WHITE);
 		
 		setContentView(R.layout.activity_main);
@@ -94,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
 		}
 	}
 	
-	private void getCameraId(){
+	private void getCameraId() {
 		Camera.CameraInfo cameraInfo = new Camera.CameraInfo();
 		for (int camIdx = 0; camIdx < Camera.getNumberOfCameras(); camIdx++) {
 			Camera.getCameraInfo(camIdx, cameraInfo);
