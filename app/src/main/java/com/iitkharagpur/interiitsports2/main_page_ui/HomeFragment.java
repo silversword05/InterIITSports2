@@ -219,37 +219,43 @@ public class HomeFragment extends Fragment {
 					Toast.makeText(getContext(), "Sorry we cannot make a scan now", Toast.LENGTH_SHORT).show();
 				}
 				else {
-					String email = Result.getContents().substring(0, Result.getContents().indexOf('^'));
-					Paper.init(Objects.requireNonNull(getContext()));
-					Paper.book().write("email", email);
-					Uri uri = new Uri.Builder()
-						.scheme("https")
-						.authority("interiit.com")
-						.appendPath("profile_req_with_qr")
-						.appendPath(Result.getContents())
-						.build();
-					RequestQueue queue = Volley.newRequestQueue(getContext());
-					StringRequest stringRequest = new StringRequest(Request.Method.GET, uri.toString(),
-						new Response.Listener<String>() {
+					try {
+						
+						String email = Result.getContents().substring(0, Result.getContents().indexOf('^'));
+						Paper.init(Objects.requireNonNull(getContext()));
+						Paper.book().write("email", email);
+						Uri uri = new Uri.Builder()
+							.scheme("https")
+							.authority("interiit.com")
+							.appendPath("profile_req_with_qr")
+							.appendPath(Result.getContents())
+							.build();
+						RequestQueue queue = Volley.newRequestQueue(getContext());
+						StringRequest stringRequest = new StringRequest(Request.Method.GET, uri.toString(),
+							new Response.Listener<String>() {
+								@Override
+								public void onResponse(String response) {
+									Log.d("RESPONSE", response);
+									JsonObject jsonObject = ((JsonArray) JsonParser.parseString(response)).get(0).getAsJsonObject();
+									Paper.book().write("name", jsonObject.get("name").getAsString());
+									Paper.book().write("iit", jsonObject.get("iit").getAsString());
+									Paper.book().write("sports", jsonObject.get("selected_sports").getAsString());
+									Paper.book().write("phone", jsonObject.get("phone").getAsString());
+								}
+							}, new Response.ErrorListener() {
 							@Override
-							public void onResponse(String response) {
-								Log.d("RESPONSE", response);
-								JsonObject jsonObject = ((JsonArray) JsonParser.parseString(response)).get(0).getAsJsonObject();
-								Paper.book().write("name", jsonObject.get("name").getAsString());
-								Paper.book().write("iit", jsonObject.get("iit").getAsString());
-								Paper.book().write("sports", jsonObject.get("selected_sports").getAsString());
-								Paper.book().write("phone", jsonObject.get("phone").getAsString());
+							public void onErrorResponse(VolleyError error) {
+								try {
+									Log.d("DATA", Objects.requireNonNull(error.getMessage()));
+								} catch (Exception ignored) {
+								}
 							}
-						}, new Response.ErrorListener() {
-						@Override
-						public void onErrorResponse(VolleyError error) {
-							try {
-								Log.d("DATA", Objects.requireNonNull(error.getMessage()));
-							} catch (Exception ignored) {}
-						}
-					});
-					queue.add(stringRequest);
-					catchMoments();
+						});
+						queue.add(stringRequest);
+						catchMoments();
+					} catch (Exception e){
+						Toast.makeText(getContext(), "Sorry we cannot make a scan now", Toast.LENGTH_SHORT).show();
+					}
 				}
 			}
 		}

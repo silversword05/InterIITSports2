@@ -26,4 +26,8 @@
     <string name="complaint_description">Complaint Description</string>
     <string name="scan_qr_and_submit">Scan QR to submit</string>
     <string name="splash">Splash</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="scan_qr_for_mess">Scan QR for Mess</string>
+    <string name="please_wait">Please Wait ..</string>
 </resources>

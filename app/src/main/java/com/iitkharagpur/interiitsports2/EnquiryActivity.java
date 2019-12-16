@@ -89,31 +89,36 @@ public class EnquiryActivity extends AppCompatActivity {
 				Toast.makeText(this, "Sorry, we cannot scan", Toast.LENGTH_SHORT).show();
 			}
 			else {
-				Uri uri = new Uri.Builder()
-					.scheme("https")
-					.authority("interiit.com")
-					.appendPath("fileInquiry")
-					.appendPath(Result.getContents())
-					.appendPath(typeComplaint)
-					.appendPath(complaintText)
-					.build();
-				RequestQueue queue = Volley.newRequestQueue(EnquiryActivity.this);
-				StringRequest stringRequest = new StringRequest(Request.Method.GET, uri.toString(),
-					new Response.Listener<String>() {
+				try {
+					Uri uri = new Uri.Builder()
+						.scheme("https")
+						.authority("interiit.com")
+						.appendPath("fileInquiry")
+						.appendPath(Result.getContents())
+						.appendPath(typeComplaint)
+						.appendPath(complaintText)
+						.build();
+					RequestQueue queue = Volley.newRequestQueue(EnquiryActivity.this);
+					StringRequest stringRequest = new StringRequest(Request.Method.GET, uri.toString(),
+						new Response.Listener<String>() {
+							@Override
+							public void onResponse(String response) {
+								Toast.makeText(EnquiryActivity.this, "You complaint is successfully accepted", Toast.LENGTH_SHORT).show();
+							}
+						}, new Response.ErrorListener() {
 						@Override
-						public void onResponse(String response) {
-							Toast.makeText(EnquiryActivity.this, "You complaint is successfully accepted", Toast.LENGTH_SHORT).show();
+						public void onErrorResponse(VolleyError error) {
+							try {
+								Toast.makeText(EnquiryActivity.this, "Sorry, we cannot accept complaints now", Toast.LENGTH_SHORT).show();
+								Log.d("ERROR", Objects.requireNonNull(error.getMessage()));
+							} catch (Exception ignored) {
+							}
 						}
-					}, new Response.ErrorListener() {
-					@Override
-					public void onErrorResponse(VolleyError error) {
-						try {
-							Toast.makeText(EnquiryActivity.this, "Sorry, we cannot accept complaints now", Toast.LENGTH_SHORT).show();
-							Log.d("ERROR", Objects.requireNonNull(error.getMessage()));
-						} catch (Exception ignored) {}
-					}
-				});
-				queue.add(stringRequest);
+					});
+					queue.add(stringRequest);
+				} catch (Exception e){
+					Toast.makeText(this, "Sorry, we cannot scan", Toast.LENGTH_SHORT).show();
+				}
 			}
 		}
 		else {

@@ -29,9 +29,9 @@ public class SportsViewAdapter extends androidx.recyclerview.widget.RecyclerView
 	@Override
 	public SportsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 		View listEditableView = LayoutInflater.from(parent.getContext()).inflate(R.layout.sports_grid, parent, false);
-		GridLayoutManager.LayoutParams params = (GridLayoutManager.LayoutParams) listEditableView.getLayoutParams();
-		params.height = 250;
-		listEditableView.setLayoutParams(params);
+//		GridLayoutManager.LayoutParams params = (GridLayoutManager.LayoutParams) listEditableView.getLayoutParams();
+//		params.height = 250;
+//		listEditableView.setLayoutParams(params);
 		return new SportsViewAdapter.SportsViewHolder(listEditableView);
 	}
 	
